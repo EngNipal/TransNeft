@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace TransNeftTest.Models
+{
+    public class Transformer
+    {
+        public int Id { get; set; }
+        public TransformerType Type { get; set; }
+        public string Number { get; set; }
+        public DateTime CheckDate { get; set; }
+        public double Сoefficient { get; set; }
+    }
+}
