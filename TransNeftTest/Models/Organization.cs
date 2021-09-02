@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
+    /// <summary>
+    /// Организация
+    /// </summary>
     public class Organization
     {
         public int Id { get; set; }

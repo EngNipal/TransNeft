@@ -5,8 +5,15 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
-    public class Consumer : Organization
+    /// <summary>
+    /// Объект потребления.
+    /// </summary>
+    public class Consumer : Organization 
     {
-        public List<MeasuringPoint> MeasurePoints { get; set; }
+        public List<MeasurePoint> MeasurePoints { get; set; } = new List<MeasurePoint>();
+        public List<DeliveryPoint> DeliveryPoints { get; set; } = new List<DeliveryPoint>();
+
+        public int? SubsidiaryId { get; set; }
+        public Subsidiary Subsidiary { get; set; }
     }
 }

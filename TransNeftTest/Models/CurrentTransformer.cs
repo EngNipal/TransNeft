@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 namespace TransNeftTest.Models
 {
     /// <summary>
-    /// Дочерняя организация
+    /// Трансформатор тока.
     /// </summary>
-    public class Holding : Organization
+    public class CurrentTransformer : Transformer
     {
-        public List<Subsidiary> Subsidiaries { get; set; } = new List<Subsidiary>();
+        public double KTT { get; set; }
     }
 }

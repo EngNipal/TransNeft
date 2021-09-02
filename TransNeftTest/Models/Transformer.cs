@@ -5,12 +5,16 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
+    /// <summary>
+    /// Трансформатор.
+    /// </summary>
     public class Transformer
     {
         public int Id { get; set; }
-        public TransformerType Type { get; set; }
         public string Number { get; set; }
         public DateTime CheckDate { get; set; }
-        public double Сoefficient { get; set; }
+
+        public int? MeasurePointId {  get; set; }
+        public MeasurePoint MeasurePoint {  get; set; }
     }
 }

@@ -5,11 +5,17 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
-    public class EloMeter
+    /// <summary>
+    /// Счётчик электроэнергии.
+    /// </summary>
+    public class ElicticityMeter
     {
         public int Id { get; set; }
         public string Number { get; set; }
         public EloMeterType Type { get; set; }
         public DateTime CheckDate { get; set; }
+
+        public int? MeasurePointId { get; set; }
+        public MeasurePoint MeasurePoint { get; set; }
     }
 }
