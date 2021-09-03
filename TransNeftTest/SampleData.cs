@@ -48,7 +48,7 @@ namespace TransNeftTest
                     });
             }
 
-            if (!context.MeasurePoints.Any())
+            if (!context.MeterPoints.Any())
             {
 
             }

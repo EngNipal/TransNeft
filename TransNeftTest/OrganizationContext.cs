@@ -9,18 +9,16 @@ using TransNeftTest.Models;
 
 namespace TransNeftTest
 {
-    /// <summary>
-    /// Контекст данных модели.
-    /// </summary>
+    /// <summary> Контекст данных модели. </summary>
     public class OrganizationContext : DbContext
     {
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Holding> Holdings { get; set; }
         public DbSet<Subsidiary> Subsidiaries { get; set; }
         public DbSet<Consumer> Consumers { get; set; }
-        public DbSet<MeterPoint> MeasurePoints { get; set; }
+        public DbSet<MeterPoint> MeterPoints { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
-        public DbSet<ElicticityMeter> ElicticityMeters { get; set; }
+        public DbSet<ElictricityMeter> ElicticityMeters { get; set; }
         public DbSet<Device> Transformers { get; set; }
         public DbSet<CurrentTransformer> CurrentTransformers { get; set; }
         public DbSet<VoltageTransformer> VoltageTransformers { get; set; }
@@ -55,7 +53,7 @@ namespace TransNeftTest
                 .WithMany(c => c.DeliveryPoints)
                 .HasForeignKey(d => d.ConsumerId);
 
-            modelBuilder.Entity<ElicticityMeter>()
+            modelBuilder.Entity<ElictricityMeter>()
                 .HasOne(e => e.MeterPoint)
                 .WithOne(m => m.ElicticityMeter);
 

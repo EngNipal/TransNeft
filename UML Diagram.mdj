@@ -1897,7 +1897,7 @@
 											"top": 315,
 											"width": 238.56396484375,
 											"height": 13,
-											"text": "+ElicticityMeter ElicticityMeter",
+											"text": "+ElictricityMeter ElictricityMeter",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3552,7 +3552,7 @@
 											"top": 599,
 											"width": 147.748046875,
 											"height": 13,
-											"text": "ElicticityMeter"
+											"text": "ElictricityMeter"
 										},
 										{
 											"_type": "LabelView",
@@ -5724,7 +5724,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qzl4SyIuLcA="
 							},
-							"name": "int Id"
+							"name": "int Id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5732,7 +5733,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qzl4SyIuLcA="
 							},
-							"name": "string Name"
+							"name": "string Name",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5740,7 +5742,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qzl4SyIuLcA="
 							},
-							"name": "string Address"
+							"name": "string Address",
+							"type": ""
 						}
 					]
 				},
@@ -5773,7 +5776,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qzou1iMePdY="
 							},
-							"name": "Subsidiary[] Subsidiaries"
+							"name": "Subsidiary[] Subsidiaries",
+							"type": ""
 						}
 					]
 				},
@@ -5834,7 +5838,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qzsp4iOeQDg="
 							},
-							"name": "Consumer[] Consumers"
+							"name": "Consumer[] Consumers",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5842,7 +5847,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qzsp4iOeQDg="
 							},
-							"name": "int HoldingId"
+							"name": "int HoldingId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5850,7 +5856,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qzsp4iOeQDg="
 							},
-							"name": "Holding Holding"
+							"name": "Holding Holding",
+							"type": ""
 						}
 					]
 				},
@@ -5911,7 +5918,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz3Q4ySC2yg="
 							},
-							"name": "MeterPoint[] MeterPoints"
+							"name": "MeterPoint[] MeterPoints",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5919,7 +5927,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz3Q4ySC2yg="
 							},
-							"name": "DeliveryPoint[] DeliveryPoints"
+							"name": "DeliveryPoint[] DeliveryPoints",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5927,7 +5936,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz3Q4ySC2yg="
 							},
-							"name": "public int SubsidiaryId"
+							"name": "public int SubsidiaryId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5935,7 +5945,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz3Q4ySC2yg="
 							},
-							"name": "public Subsidiary Subsidiary"
+							"name": "public Subsidiary Subsidiary",
+							"type": ""
 						}
 					]
 				},
@@ -5983,7 +5994,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "int Id"
+							"name": "int Id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5991,7 +6003,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "string Name"
+							"name": "string Name",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5999,7 +6012,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "int ElictricityMeterId"
+							"name": "int ElictricityMeterId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6007,7 +6021,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "ElicticityMeter ElicticityMeter"
+							"name": "ElictricityMeter ElictricityMeter"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6015,7 +6029,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "int CurrentTransformerId"
+							"name": "int CurrentTransformerId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6023,7 +6038,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "CurrentTransformer CurrentTransformer"
+							"name": "CurrentTransformer CurrentTransformer",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6031,7 +6047,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "int VoltageTransformerId"
+							"name": "int VoltageTransformerId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6039,7 +6056,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "VoltageTransformer VoltageTransformer"
+							"name": "VoltageTransformer VoltageTransformer",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6047,7 +6065,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "int ConsumerId"
+							"name": "int ConsumerId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6055,7 +6074,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "Consumer Consumer"
+							"name": "Consumer Consumer",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6063,7 +6083,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "int CalcMeterId"
+							"name": "int CalcMeterId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6071,7 +6092,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "CalcMeter CalcMeter"
+							"name": "CalcMeter CalcMeter",
+							"type": ""
 						}
 					]
 				},
@@ -6119,7 +6141,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz7VLyaZuw8="
 							},
-							"name": "int ID"
+							"name": "int ID",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6127,7 +6150,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz7VLyaZuw8="
 							},
-							"name": "string Name"
+							"name": "string Name",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6135,7 +6159,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz7VLyaZuw8="
 							},
-							"name": "int MaxPower"
+							"name": "int MaxPower",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6143,7 +6168,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz7VLyaZuw8="
 							},
-							"name": "int CalcMeterId"
+							"name": "int CalcMeterId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6151,7 +6177,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz7VLyaZuw8="
 							},
-							"name": "CalcMeter CalcMeter"
+							"name": "CalcMeter CalcMeter",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6159,7 +6186,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz7VLyaZuw8="
 							},
-							"name": "int ConsumerId"
+							"name": "int ConsumerId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6167,7 +6195,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz7VLyaZuw8="
 							},
-							"name": "Consumer Consumer"
+							"name": "Consumer Consumer",
+							"type": ""
 						}
 					]
 				},
@@ -6270,7 +6299,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0AcfShGq44="
 							},
-							"name": "int Id"
+							"name": "int Id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6278,7 +6308,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0AcfShGq44="
 							},
-							"name": "DateTime StartDate"
+							"name": "DateTime StartDate",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6286,7 +6317,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0AcfShGq44="
 							},
-							"name": "DateTime EndDate"
+							"name": "DateTime EndDate",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6294,7 +6326,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0AcfShGq44="
 							},
-							"name": "int DeliveryPointId"
+							"name": "int DeliveryPointId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6302,7 +6335,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0AcfShGq44="
 							},
-							"name": "DeliveryPoint DeliveryPoint"
+							"name": "DeliveryPoint DeliveryPoint",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6310,7 +6344,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0AcfShGq44="
 							},
-							"name": "int MeterPointId"
+							"name": "int MeterPointId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6318,7 +6353,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0AcfShGq44="
 							},
-							"name": "MeterPoint MeterPoint"
+							"name": "MeterPoint MeterPoint",
+							"type": ""
 						}
 					]
 				},
@@ -6328,7 +6364,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ElicticityMeter",
+					"name": "ElictricityMeter",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -6379,7 +6415,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0Ergyt2wrc="
 							},
-							"name": "string Type"
+							"name": "string Type",
+							"type": ""
 						}
 					]
 				},
@@ -6397,7 +6434,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0IfRC3oqaQ="
 							},
-							"name": "int Id"
+							"name": "int Id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6405,7 +6443,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0IfRC3oqaQ="
 							},
-							"name": "string Number"
+							"name": "string Number",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6413,7 +6452,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0IfRC3oqaQ="
 							},
-							"name": "DateTime CheckDate"
+							"name": "DateTime CheckDate",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6421,7 +6461,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0IfRC3oqaQ="
 							},
-							"name": "int? MeterPointId"
+							"name": "int? MeterPointId",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6429,7 +6470,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0IfRC3oqaQ="
 							},
-							"name": "MeterPoint MeterPoint"
+							"name": "MeterPoint MeterPoint",
+							"type": ""
 						}
 					]
 				},
@@ -6490,7 +6532,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0KP8y7GGbk="
 							},
-							"name": "double KTT"
+							"name": "double KTT",
+							"type": ""
 						}
 					]
 				},
@@ -6551,7 +6594,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q0K79jB1SRM="
 							},
-							"name": "double KTH"
+							"name": "double KTH",
+							"type": ""
 						}
 					]
 				},
@@ -6599,7 +6643,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q4Dmg+GAR/8="
 							},
-							"name": "first"
+							"name": "first",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6607,7 +6652,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q4Dmg+GAR/8="
 							},
-							"name": "second"
+							"name": "second",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6615,7 +6661,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF7q4Dmg+GAR/8="
 							},
-							"name": "third"
+							"name": "third",
+							"type": ""
 						}
 					]
 				},

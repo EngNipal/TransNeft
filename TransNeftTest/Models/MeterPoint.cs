@@ -14,7 +14,7 @@ namespace TransNeftTest.Models
 
         public int ElictricityMeterId { get; set; }
         /// <summary> Счётчик электроэнергии. </summary>
-        public ElicticityMeter ElicticityMeter { get; set; }
+        public ElictricityMeter ElicticityMeter { get; set; }
 
         public int CurrentTransformerId { get; set; }
         /// <summary>Трансформатор тока. </summary>

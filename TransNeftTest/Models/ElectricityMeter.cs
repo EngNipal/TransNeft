@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
-    /// <summary>
-    /// Счётчик электроэнергии.
-    /// </summary>
-    public class ElicticityMeter : Device
+    /// <summary> Счётчик электроэнергии. </summary>
+    public class ElictricityMeter : Device
     {
         /// <summary> Тип счётчика </summary>
         public string Type { get; set; }
