@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
-    /// <summary>
-    /// Дочерняя организация
-    /// </summary>
+    /// <summary> Головная организация </summary>
     public class Holding : Organization
     {
+        /// <summary> Список дочерних организаций </summary>
         public List<Subsidiary> Subsidiaries { get; set; } = new List<Subsidiary>();
     }
 }

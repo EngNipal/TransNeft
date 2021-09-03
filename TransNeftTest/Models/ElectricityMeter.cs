@@ -8,14 +8,9 @@ namespace TransNeftTest.Models
     /// <summary>
     /// Счётчик электроэнергии.
     /// </summary>
-    public class ElicticityMeter
+    public class ElicticityMeter : Device
     {
-        public int Id { get; set; }
-        public string Number { get; set; }
-        public ElicticityMeterType Type { get; set; }
-        public DateTime CheckDate { get; set; }
-
-        public int? MeterPointId { get; set; }
-        public MeterPoint MeterPoint { get; set; }
+        /// <summary> Тип счётчика </summary>
+        public string Type { get; set; }
     }
 }

@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TransNeftTest.Models;
 
-namespace TransNeftTest.Models
+namespace TransNeftTest
 {
     /// <summary>
     /// Контекст данных модели.
@@ -20,11 +21,10 @@ namespace TransNeftTest.Models
         public DbSet<MeterPoint> MeasurePoints { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
         public DbSet<ElicticityMeter> ElicticityMeters { get; set; }
-        public DbSet<Transformer> Transformers { get; set; }
+        public DbSet<Device> Transformers { get; set; }
         public DbSet<CurrentTransformer> CurrentTransformers { get; set; }
         public DbSet<VoltageTransformer> VoltageTransformers { get; set; }
         public DbSet<CalcMeter> CalcMeters { get; set; }
-        public DbSet<CalcMeterToMeterPoint> CalcMeterToMeterPoints { get; set; }
 
 
 

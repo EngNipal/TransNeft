@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
-    /// <summary>
-    /// Организация
-    /// </summary>
+    /// <summary> Организация </summary>
     public class Organization
     {
         public int Id { get; set; }
+        /// <summary> Название </summary>
         public string Name { get; set; }
+        /// <summary> Адрес </summary>
         public string Address { get; set; }
     }
 }
