@@ -47,7 +47,7 @@ namespace TransNeftTest.Models
 
             modelBuilder.Entity<MeterPoint>()
                 .HasOne(m => m.Consumer)
-                .WithMany(c => c.MeasurePoints)
+                .WithMany(c => c.MeterPoints)
                 .HasForeignKey(m => m.ConsumerId);
 
             modelBuilder.Entity<DeliveryPoint>()
@@ -56,15 +56,15 @@ namespace TransNeftTest.Models
                 .HasForeignKey(d => d.ConsumerId);
 
             modelBuilder.Entity<ElicticityMeter>()
-                .HasOne(e => e.MeasurePoint)
+                .HasOne(e => e.MeterPoint)
                 .WithOne(m => m.ElicticityMeter);
 
             modelBuilder.Entity<CurrentTransformer>()
-                .HasOne(t => t.MeasurePoint)
+                .HasOne(t => t.MeterPoint)
                 .WithOne(m => m.CurrentTransformer);
 
             modelBuilder.Entity<VoltageTransformer>()
-                .HasOne(t => t.MeasurePoint)
+                .HasOne(t => t.MeterPoint)
                 .WithOne(m => m.VoltageTransformer);
 
             modelBuilder.Entity<CalcMeter>()

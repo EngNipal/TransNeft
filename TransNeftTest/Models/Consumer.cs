@@ -10,7 +10,7 @@ namespace TransNeftTest.Models
     /// </summary>
     public class Consumer : Organization 
     {
-        public List<MeterPoint> MeasurePoints { get; set; } = new List<MeterPoint>();
+        public List<MeterPoint> MeterPoints { get; set; } = new List<MeterPoint>();
         public List<DeliveryPoint> DeliveryPoints { get; set; } = new List<DeliveryPoint>();
 
         public int? SubsidiaryId { get; set; }

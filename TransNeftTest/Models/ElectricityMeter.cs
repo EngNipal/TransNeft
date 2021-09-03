@@ -12,10 +12,10 @@ namespace TransNeftTest.Models
     {
         public int Id { get; set; }
         public string Number { get; set; }
-        public EloMeterType Type { get; set; }
+        public ElicticityMeterType Type { get; set; }
         public DateTime CheckDate { get; set; }
 
-        public int? MeasurePointId { get; set; }
-        public MeterPoint MeasurePoint { get; set; }
+        public int? MeterPointId { get; set; }
+        public MeterPoint MeterPoint { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace TransNeftTest.Models
         
         public int? MeterPointId { get; set; }
         [ForeignKey("MeterPointId")]
-        public MeterPoint MeasurePoint { get; set; }
+        public MeterPoint MeterPoint { get; set; }
         
     }
 }

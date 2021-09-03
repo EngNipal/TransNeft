@@ -13,6 +13,8 @@ namespace TransNeftTest.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public int MaxPower { get; set; }
+
+        public int? CalcMeterId { get; set; }
         public CalcMeter CalcMeter { get; set; }
 
         public int? ConsumerId { get; set; }
