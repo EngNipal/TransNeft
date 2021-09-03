@@ -9,7 +9,7 @@ namespace TransNeftTest.Models
     /// <summary>
     /// Класс, связывающий 
     /// </summary>
-    public class DateConnector
+    public class CalcMeterToMeterPoint
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
@@ -19,9 +19,9 @@ namespace TransNeftTest.Models
         [ForeignKey("CalcMeterId")]
         public CalcMeter CalcMeter {  get; set; }
         
-        public int? MeasurePointId { get; set; }
-        [ForeignKey("MeasurePointId")]
-        public MeasurePoint MeasurePoint { get; set; }
+        public int? MeterPointId { get; set; }
+        [ForeignKey("MeterPointId")]
+        public MeterPoint MeasurePoint { get; set; }
         
     }
 }

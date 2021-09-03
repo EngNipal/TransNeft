@@ -8,7 +8,7 @@ namespace TransNeftTest.Models
     /// <summary>
     /// Точка измерения электроэнергии.
     /// </summary>
-    public class MeasurePoint
+    public class MeterPoint
     {
         public int Id { get; set; }
         public string Name { get; set; }

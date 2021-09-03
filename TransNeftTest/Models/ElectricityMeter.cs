@@ -16,6 +16,6 @@ namespace TransNeftTest.Models
         public DateTime CheckDate { get; set; }
 
         public int? MeasurePointId { get; set; }
-        public MeasurePoint MeasurePoint { get; set; }
+        public MeterPoint MeasurePoint { get; set; }
     }
 }

@@ -17,14 +17,14 @@ namespace TransNeftTest.Models
         public DbSet<Holding> Holdings { get; set; }
         public DbSet<Subsidiary> Subsidiaries { get; set; }
         public DbSet<Consumer> Consumers { get; set; }
-        public DbSet<MeasurePoint> MeasurePoints { get; set; }
+        public DbSet<MeterPoint> MeasurePoints { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
         public DbSet<ElicticityMeter> ElicticityMeters { get; set; }
-        public DbSet<Transformer> Transformer { get; set; }
+        public DbSet<Transformer> Transformers { get; set; }
         public DbSet<CurrentTransformer> CurrentTransformers { get; set; }
         public DbSet<VoltageTransformer> VoltageTransformers { get; set; }
         public DbSet<CalcMeter> CalcMeters { get; set; }
-        public DbSet<DateConnector> DateConnectors { get; set; }
+        public DbSet<CalcMeterToMeterPoint> CalcMeterToMeterPoints { get; set; }
 
 
 
@@ -45,7 +45,7 @@ namespace TransNeftTest.Models
                 .WithOne(c => c.Subsidiary)
                 .HasForeignKey(c => c.SubsidiaryId);
 
-            modelBuilder.Entity<MeasurePoint>()
+            modelBuilder.Entity<MeterPoint>()
                 .HasOne(m => m.Consumer)
                 .WithMany(c => c.MeasurePoints)
                 .HasForeignKey(m => m.ConsumerId);
