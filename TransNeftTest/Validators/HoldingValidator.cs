@@ -1,14 +1,14 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using TransNeftTest.Models;
+using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class HoldingValidator : AbstractValidator<Holding>
+    public class HoldingValidator : AbstractValidator<HoldingDTO>
     {
         public HoldingValidator()
         {
-            RuleForEach(h => h.Subsidiaries).SetValidator(new SubsidiaryValidator());
+
         }
     }
 }

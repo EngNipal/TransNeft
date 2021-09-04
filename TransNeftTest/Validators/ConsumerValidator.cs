@@ -1,16 +1,14 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using TransNeftTest.Models;
+using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class ConsumerValidator : AbstractValidator<Consumer>
+    public class ConsumerValidator : AbstractValidator<ConsumerDTO>
     {
         public ConsumerValidator()
         {
-            RuleForEach(c => c.MeterPoints).SetValidator(new MeterPointValidator());
-            RuleForEach(c => c.DeliveryPoints).SetValidator(new DeliveryPointValidator());
-            RuleFor(c => c.Subsidiary).NotEmpty();
+            RuleFor(c => c.SubsidiaryId).NotEmpty();
         }
     }
 }

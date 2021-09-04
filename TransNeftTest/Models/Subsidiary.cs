@@ -10,8 +10,8 @@ namespace TransNeftTest.Models
     {
         /// <summary> Список потребителей </summary>
         public List<Consumer> Consumers { get; set; } = new List<Consumer>();
-
-        public int HoldingId {  get; set; }
+        /// <summary> Id головной организации </summary>
+        public int HoldingId { get; set; }
         /// <summary> Головная организация </summary>
         public Holding Holding { get; set; }
     }

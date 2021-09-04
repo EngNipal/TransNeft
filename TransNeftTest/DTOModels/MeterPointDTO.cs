@@ -12,7 +12,6 @@ namespace TransNeftTest.DTOModels
         public int Id { get; set; }
         /// <summary> Наименование </summary>
         public string Name { get; set; }
-
         /// <summary> Id счётчика электроэнергии. </summary>
         public int ElictricityMeterId { get; set; }
         /// <summary> Id трансформатора тока. </summary>

@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using TransNeftTest.Models;
+using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class ElictricityMeterValidator : AbstractValidator<ElictricityMeter>
+    public class ElictricityMeterValidator : AbstractValidator<ElictricityMeterDTO>
     {
         public ElictricityMeterValidator()
         {

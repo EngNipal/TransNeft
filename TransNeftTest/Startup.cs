@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,10 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
+using TransNeftTest.Repositories;
 using TransNeftTest.Validators;
 
 namespace TransNeftTest
@@ -33,6 +36,17 @@ namespace TransNeftTest
         {
             services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<OrganizationValidator>());
             services.AddControllers();
+
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+
+            //services.AddScoped<ICourseService, CourseService>();
+            //services.AddScoped<IGroupService, GroupService>();
+            //services.AddScoped<IStudentService, StudentService>();
+
+            //services.AddScoped<IRepository<Course>, SQLCourseRepository>();
+            //services.AddScoped<IRepository<Group>, SQLGroupRepository>();
+            //services.AddScoped<IRepository<Student>, SQLStudentRepository>();
+
 
             services.AddSwaggerGen(c =>
             {

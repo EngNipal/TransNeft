@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TransNeftTest.DTOModels;
 using TransNeftTest.Models;
+using TransNeftTest.ViewModels;
 
 namespace TransNeftTest
 {
@@ -13,7 +14,11 @@ namespace TransNeftTest
         public AutoMappingProfile()
         {
             // MeterPointService
+            CreateMap<MeterPoint, MeterPointViewModel>();
+            CreateMap<MeterPointViewModel, MeterPoint>();
             CreateMap<MeterPointDTO, MeterPoint>();
+            
+            // CalcMeterService
         }
     }
 }

@@ -1,18 +1,19 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
 using System;
-using TransNeftTest.Models;
+using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class CalcMeterValidator : AbstractValidator<CalcMeter>
+    public class CalcMeterValidator : AbstractValidator<CalcMeterDTO>
     {
         public CalcMeterValidator()
         {
+            RuleFor(cm => cm.Id).NotEmpty();
             RuleFor(cm => cm.StartDate).GreaterThan(DateTime.MinValue);
             RuleFor(cm => cm.EndDate).GreaterThan(DateTime.MinValue);
-            RuleFor(cm => cm.DeliveryPoint).NotEmpty();
-            RuleFor(cm => cm.MeterPoint).NotEmpty();
+            RuleFor(cm => cm.DeliveryPointId).NotEmpty();
+            RuleFor(cm => cm.MeterPointId).NotEmpty();
         }
     }
 }
