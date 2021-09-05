@@ -9,7 +9,6 @@ namespace TransNeftTest
     {
         public static void AddServiceProfile(this IServiceCollection services)
         {
-            //services
             services.AddScoped<ICalcMeterService, CalcMeterService>();
             services.AddScoped<IConsumerService, ConsumerService>();
             services.AddScoped<ICurrentTransformerService, CurrentTransformerService>();
