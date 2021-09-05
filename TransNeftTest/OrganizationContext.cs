@@ -18,7 +18,7 @@ namespace TransNeftTest
         public DbSet<Consumer> Consumers { get; set; }
         public DbSet<MeterPoint> MeterPoints { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
-        public DbSet<ElictricityMeter> ElicticityMeters { get; set; }
+        public DbSet<ElectricityMeter> ElicticityMeters { get; set; }
         public DbSet<Device> Transformers { get; set; }
         public DbSet<CurrentTransformer> CurrentTransformers { get; set; }
         public DbSet<VoltageTransformer> VoltageTransformers { get; set; }
@@ -53,7 +53,7 @@ namespace TransNeftTest
                 .WithMany(c => c.DeliveryPoints)
                 .HasForeignKey(d => d.ConsumerId);
 
-            modelBuilder.Entity<ElictricityMeter>()
+            modelBuilder.Entity<ElectricityMeter>()
                 .HasOne(e => e.MeterPoint)
                 .WithOne(m => m.ElicticityMeter);
 

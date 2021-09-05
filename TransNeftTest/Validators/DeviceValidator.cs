@@ -17,7 +17,7 @@ namespace TransNeftTest.Validators
             RuleFor(d => d.MeterPointId).NotEmpty();
             RuleFor(d => d).SetInheritanceValidator(v =>
             {
-                v.Add(new ElictricityMeterValidator());
+                v.Add(new ElectricityMeterValidator());
                 v.Add(new CurrentTransformerValidator());
                 v.Add(new VoltageTransformerValidator());
             });

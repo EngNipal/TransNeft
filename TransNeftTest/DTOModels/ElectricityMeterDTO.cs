@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TransNeftTest.Models
+namespace TransNeftTest.DTOModels
 {
-    /// <summary> Счётчик электроэнергии. </summary>
-    public class ElectricityMeter : Device
+    public class ElectricityMeterDTO : DeviceDTO
     {
         /// <summary> Тип счётчика </summary>
         public string Type { get; set; }

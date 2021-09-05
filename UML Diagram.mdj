@@ -1880,7 +1880,7 @@
 											"top": 300,
 											"width": 238.56396484375,
 											"height": 13,
-											"text": "+int ElictricityMeterId",
+											"text": "+int ElectricityMeterId",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1897,7 +1897,7 @@
 											"top": 315,
 											"width": 238.56396484375,
 											"height": 13,
-											"text": "+ElictricityMeter ElictricityMeter",
+											"text": "+ElectricityMeter ElictricityMeter",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3569,7 +3569,7 @@
 											"top": 599,
 											"width": 147.748046875,
 											"height": 13,
-											"text": "ElictricityMeter"
+											"text": "ElectricityMeter"
 										},
 										{
 											"_type": "LabelView",
@@ -6029,8 +6029,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "int ElictricityMeterId",
-							"type": ""
+							"name": "int ElectricityMeterId"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6038,8 +6037,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF7qz6N7iYNUqU="
 							},
-							"name": "ElictricityMeter ElictricityMeter",
-							"type": ""
+							"name": "ElectricityMeter ElictricityMeter"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6390,7 +6388,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ElictricityMeter",
+					"name": "ElectricityMeter",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

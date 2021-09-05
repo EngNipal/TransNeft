@@ -10,7 +10,7 @@ namespace TransNeftTest.Services
     {
         Task AddMeterPoint();
         Task<List<CalcMeter>> GetCalcMetersByYear();
-        Task<List<ElictricityMeter>> GetElicticityMeterExpired();
+        Task<List<ElectricityMeter>> GetElicticityMeterExpired();
         Task<List<VoltageTransformer>> GetVoltageTransformersByConsumer();
         Task<List<CurrentTransformer>> GetCurrentTransformersByConsumer();
     }

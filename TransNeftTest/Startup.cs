@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,18 +36,13 @@ namespace TransNeftTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<OrganizationValidator>());
-            services.AddControllers();
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
-            //services.AddScoped<ICourseService, CourseService>();
-            //services.AddScoped<IGroupService, GroupService>();
-            //services.AddScoped<IStudentService, StudentService>();
+            services.AddServiceProfile();
 
-            //services.AddScoped<IRepository<Course>, SQLCourseRepository>();
-            //services.AddScoped<IRepository<Group>, SQLGroupRepository>();
-            //services.AddScoped<IRepository<Student>, SQLStudentRepository>();
-
+            services.AddDbContext<OrganizationContext>(options => options.UseSqlServer(connection));
+            services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
             {

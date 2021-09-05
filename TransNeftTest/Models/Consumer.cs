@@ -12,7 +12,7 @@ namespace TransNeftTest.Models
         public List<MeterPoint> MeterPoints { get; set; } = new List<MeterPoint>();
         /// <summary> Список точек доставки </summary>
         public List<DeliveryPoint> DeliveryPoints { get; set; } = new List<DeliveryPoint>();
-
+        /// <summary> Id организации-владельца </summary>
         public int SubsidiaryId { get; set; }
         /// <summary> Организация-владелец </summary>
         public Subsidiary Subsidiary { get; set; }

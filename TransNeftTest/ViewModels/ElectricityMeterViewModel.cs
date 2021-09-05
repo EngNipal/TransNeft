@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TransNeftTest.DTOModels
+namespace TransNeftTest.ViewModels
 {
-    public class ElictricityMeterDTO : DeviceDTO
+    public class ElectricityMeterViewModel : DeviceViewModel
     {
         /// <summary> Тип счётчика </summary>
         public string Type { get; set; }
