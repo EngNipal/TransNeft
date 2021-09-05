@@ -23,7 +23,6 @@ namespace TransNeftTest.Models
         /// <summary> Id точки измерения электроэнергии. </summary>
         public int MeterPointId { get; set; }
         /// <summary> Точка измерения электроэнергии. </summary>
-        [ForeignKey("MeterPointId")]
         public MeterPoint MeterPoint { get; set; }
     }
 }

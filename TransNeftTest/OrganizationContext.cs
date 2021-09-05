@@ -79,6 +79,7 @@ namespace TransNeftTest
                 .HasOne(cm => cm.DeliveryPoint)
                 .WithOne(dp => dp.CalcMeter)
                 .HasForeignKey<CalcMeter>(cm => cm.DeliveryPointId)
+                .HasForeignKey<CalcMeter>(cm => cm.MeterPointId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

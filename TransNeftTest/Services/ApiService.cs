@@ -1,21 +1,26 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransNeftTest.DTOModels;
 using TransNeftTest.Models;
+using TransNeftTest.Repositories;
 
 namespace TransNeftTest.Services
 {
-    public class WebService : IWebService
+    public class ApiService : IApiService
     {
-        public Task AddMeterPoint()
+        private IMapper _mapper;
+        
+        public Task AddMeterPoint(MeterPointDTO meterPointDto)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<List<CalcMeter>> GetCalcMetersByYear(int year)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<List<CurrentTransformer>> GetCurrentTransformersByConsumer(string consumerName)
