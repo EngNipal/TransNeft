@@ -8,5 +8,24 @@ namespace TransNeftTest.Repositories
 {
     public class SQLHoldingRepository : IRepository<Holding>
     {
+        public Task<Holding> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<Holding>> GetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(Holding item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

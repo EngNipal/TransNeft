@@ -52,6 +52,8 @@ namespace TransNeftTest
             {
 
             }
+
+            context.SaveChanges();
         }
     }
 }

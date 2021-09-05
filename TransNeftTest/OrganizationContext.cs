@@ -18,8 +18,8 @@ namespace TransNeftTest
         public DbSet<Consumer> Consumers { get; set; }
         public DbSet<MeterPoint> MeterPoints { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
-        public DbSet<ElectricityMeter> ElicticityMeters { get; set; }
-        public DbSet<Device> Transformers { get; set; }
+        public DbSet<ElectricityMeter> ElectricityMeters { get; set; }
+        public DbSet<Device> Devices { get; set; }
         public DbSet<CurrentTransformer> CurrentTransformers { get; set; }
         public DbSet<VoltageTransformer> VoltageTransformers { get; set; }
         public DbSet<CalcMeter> CalcMeters { get; set; }
@@ -36,38 +36,50 @@ namespace TransNeftTest
             modelBuilder.Entity<Holding>()
                 .HasMany(h => h.Subsidiaries)
                 .WithOne(s => s.Holding)
-                .HasForeignKey(s => s.HoldingId);
+                .HasForeignKey(s => s.HoldingId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Subsidiary>()
                 .HasMany(s => s.Consumers)
                 .WithOne(c => c.Subsidiary)
-                .HasForeignKey(c => c.SubsidiaryId);
+                .HasForeignKey(c => c.SubsidiaryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<MeterPoint>()
-                .HasOne(m => m.Consumer)
+                .HasOne(mp => mp.Consumer)
                 .WithMany(c => c.MeterPoints)
-                .HasForeignKey(m => m.ConsumerId);
+                .HasForeignKey(mp => mp.ConsumerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DeliveryPoint>()
-                .HasOne(d => d.Consumer)
+                .HasOne(dp => dp.Consumer)
                 .WithMany(c => c.DeliveryPoints)
-                .HasForeignKey(d => d.ConsumerId);
+                .HasForeignKey(dp => dp.ConsumerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ElectricityMeter>()
-                .HasOne(e => e.MeterPoint)
-                .WithOne(m => m.ElicticityMeter);
+                .HasOne(em => em.MeterPoint)
+                .WithOne(mp => mp.ElectricityMeter)
+                .HasForeignKey<ElectricityMeter>(em => em.MeterPointId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<CurrentTransformer>()
-                .HasOne(t => t.MeterPoint)
-                .WithOne(m => m.CurrentTransformer);
+                .HasOne(ct => ct.MeterPoint)
+                .WithOne(mp => mp.CurrentTransformer)
+                .HasForeignKey<CurrentTransformer>(ct => ct.MeterPointId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<VoltageTransformer>()
-                .HasOne(t => t.MeterPoint)
-                .WithOne(m => m.VoltageTransformer);
+                .HasOne(vt => vt.MeterPoint)
+                .WithOne(mp => mp.VoltageTransformer)
+                .HasForeignKey<VoltageTransformer>(vt => vt.MeterPointId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<CalcMeter>()
-                .HasOne(c => c.DeliveryPoint)
-                .WithOne(d => d.CalcMeter);
+                .HasOne(cm => cm.DeliveryPoint)
+                .WithOne(dp => dp.CalcMeter)
+                .HasForeignKey<CalcMeter>(cm => cm.DeliveryPointId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

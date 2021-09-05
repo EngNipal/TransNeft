@@ -40,14 +40,15 @@ namespace TransNeftTest
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddServiceProfile();
-
-            services.AddDbContext<OrganizationContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TransNeftTest", Version = "v1" });
-            });
+            services.AddDbContext<OrganizationContext>(options => options.UseSqlServer(connection));
+            
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TransNeftTest", Version = "v1" });
+            //});
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -65,8 +66,8 @@ namespace TransNeftTest
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TransNeftTest v1"));
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TransNeftTest v1"));
             }
 
             app.UseHttpsRedirection();

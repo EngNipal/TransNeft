@@ -8,5 +8,24 @@ namespace TransNeftTest.Repositories
 {
     public class SQLSubsidiaryRepository : IRepository<Subsidiary>
     {
+        public Task<Subsidiary> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<Subsidiary>> GetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(Subsidiary item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

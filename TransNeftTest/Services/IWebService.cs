@@ -9,9 +9,9 @@ namespace TransNeftTest.Services
     public interface IWebService
     {
         Task AddMeterPoint();
-        Task<List<CalcMeter>> GetCalcMetersByYear();
-        Task<List<ElectricityMeter>> GetElicticityMeterExpired();
-        Task<List<VoltageTransformer>> GetVoltageTransformersByConsumer();
-        Task<List<CurrentTransformer>> GetCurrentTransformersByConsumer();
+        Task<List<CalcMeter>> GetCalcMetersByYear(int year);
+        Task<List<ElectricityMeter>> GetElectricityMeterExpired();
+        Task<List<VoltageTransformer>> GetVoltageTransformersByConsumer(string consumerName);
+        Task<List<CurrentTransformer>> GetCurrentTransformersByConsumer(string consumerName);
     }
 }

@@ -19,7 +19,7 @@ namespace TransNeftTest.Repositories
         }
 
         public async Task<MeterPoint> GetAsync(int meterPointId) => await _db.MeterPoints
-            .Include(mp => mp.ElicticityMeter)
+            .Include(mp => mp.ElectricityMeter)
             .Include(mp => mp.CurrentTransformer)
             .Include(mp => mp.VoltageTransformer)
             .Include(mp => mp.Consumer)
@@ -27,7 +27,7 @@ namespace TransNeftTest.Repositories
             .FirstOrDefaultAsync(mp => mp.Id == meterPointId);
 
         public async Task<IList<MeterPoint>> GetListAsync() => await _db.MeterPoints
-            .Include(mp => mp.ElicticityMeter)
+            .Include(mp => mp.ElectricityMeter)
             .Include(mp => mp.CurrentTransformer)
             .Include(mp => mp.VoltageTransformer)
             .Include(mp => mp.Consumer)
@@ -45,7 +45,7 @@ namespace TransNeftTest.Repositories
             }
 
             meterPointDb.Name = item.Name;
-            meterPointDb.ElicticityMeter = item.ElicticityMeter;
+            meterPointDb.ElectricityMeter = item.ElectricityMeter;
             meterPointDb.CurrentTransformer = item.CurrentTransformer;
             meterPointDb.VoltageTransformer = item.VoltageTransformer;
             meterPointDb.Consumer = item.Consumer;

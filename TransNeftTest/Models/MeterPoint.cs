@@ -12,9 +12,9 @@ namespace TransNeftTest.Models
         /// <summary> Наименование </summary>
         public string Name { get; set; }
         /// <summary> Id счётчика электроэнергии. </summary>
-        public int ElictricityMeterId { get; set; }
+        public int ElectricityMeterId { get; set; }
         /// <summary> Счётчик электроэнергии. </summary>
-        public ElectricityMeter ElicticityMeter { get; set; }
+        public ElectricityMeter ElectricityMeter { get; set; }
         /// <summary> Id трансформатора тока. </summary>
         public int CurrentTransformerId { get; set; }
         /// <summary>Трансформатор тока. </summary>
