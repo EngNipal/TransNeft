@@ -4,15 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using TransNeftTest.DTOModels;
 using TransNeftTest.Models;
+using TransNeftTest.ViewModels;
 
 namespace TransNeftTest.Services
 {
     public interface IApiService
     {
-        Task AddMeterPoint(MeterPointDTO meterPointDto);
-        Task<List<CalcMeter>> GetCalcMetersByYear(int year);
-        Task<List<ElectricityMeter>> GetElectricityMeterExpired();
-        Task<List<VoltageTransformer>> GetVoltageTransformersByConsumer(string consumerName);
-        Task<List<CurrentTransformer>> GetCurrentTransformersByConsumer(string consumerName);
+        public Task CreateMeterPoint(MeterPointDTO meterPointDto);
+        public Task<List<CalcMeterViewModel>> GetCalcMetersByYear(int year);
+        public Task<List<ElectricityMeterViewModel>> GetElectricityMeterExpired();
+        public Task<List<VoltageTransformerViewModel>> GetVoltageTransformersByConsumer(string consumerName);
+        public Task<List<CurrentTransformerViewModel>> GetCurrentTransformersByConsumer(string consumerName);
     }
 }

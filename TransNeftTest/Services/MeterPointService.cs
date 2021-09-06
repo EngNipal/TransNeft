@@ -24,6 +24,8 @@ namespace TransNeftTest.Services
             _mapper = mapper;
         }
 
+        
+
         public async Task<MeterPointViewModel> GetAsync(int meterPointId)
 {
             MeterPoint meterPointDb = await _meterPointRepo.GetAsync(meterPointId);
