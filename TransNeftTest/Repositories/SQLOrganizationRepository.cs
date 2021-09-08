@@ -13,6 +13,12 @@ namespace TransNeftTest.Repositories
         {
             _db = context;
         }
+
+        public Task AddAsync(Organization entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Organization> GetAsync(int id)
         {
             throw new NotImplementedException();
