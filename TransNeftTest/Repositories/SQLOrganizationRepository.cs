@@ -8,6 +8,11 @@ namespace TransNeftTest.Repositories
 {
     public class SQLOrganizationRepository : IRepository<Organization>
     {
+        private OrganizationContext _db;
+        public SQLOrganizationRepository(OrganizationContext context)
+        {
+            _db = context;
+        }
         public Task<Organization> GetAsync(int id)
         {
             throw new NotImplementedException();

@@ -8,6 +8,11 @@ namespace TransNeftTest.Repositories
 {
     public class SQLCurrentTransformerRepository : IRepository<CurrentTransformer>
     {
+        private OrganizationContext _db;
+        public SQLCurrentTransformerRepository(OrganizationContext context)
+        {
+            _db = context;
+        }
         public Task<CurrentTransformer> GetAsync(int id)
         {
             throw new NotImplementedException();

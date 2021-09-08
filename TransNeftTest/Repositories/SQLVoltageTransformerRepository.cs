@@ -8,6 +8,11 @@ namespace TransNeftTest.Repositories
 {
     public class SQLVoltageTransformerRepository : IRepository<VoltageTransformer>
     {
+        private OrganizationContext _db;
+        public SQLVoltageTransformerRepository(OrganizationContext context)
+        {
+            _db = context;
+        }
         public Task<VoltageTransformer> GetAsync(int id)
         {
             throw new NotImplementedException();

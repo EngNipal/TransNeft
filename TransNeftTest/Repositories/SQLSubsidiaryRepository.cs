@@ -8,6 +8,11 @@ namespace TransNeftTest.Repositories
 {
     public class SQLSubsidiaryRepository : IRepository<Subsidiary>
     {
+        private OrganizationContext _db;
+        public SQLSubsidiaryRepository(OrganizationContext context)
+        {
+            _db = context;
+        }
         public Task<Subsidiary> GetAsync(int id)
         {
             throw new NotImplementedException();

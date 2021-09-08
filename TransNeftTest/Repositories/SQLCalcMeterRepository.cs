@@ -8,6 +8,11 @@ namespace TransNeftTest.Repositories
 {
     public class SQLCalcMeterRepository : IRepository<CalcMeter>
     {
+        private OrganizationContext _db;
+        public SQLCalcMeterRepository(OrganizationContext context)
+        {
+            _db = context;
+        }
         public Task<CalcMeter> GetAsync(int id)
         {
             throw new NotImplementedException();

@@ -84,22 +84,6 @@ namespace TransNeftTest.Controllers
             return CreatedAtAction(nameof(GetMeterPoint), new { id = meterPoint.Id }, meterPoint);
         }
 
-        // DELETE: api/MeterPoints/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteMeterPoint(int id)
-        //{
-        //    var meterPoint = await _context.MeterPoints.FindAsync(id);
-        //    if (meterPoint == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.MeterPoints.Remove(meterPoint);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
         private bool MeterPointExists(int id)
         {
             return _context.MeterPoints.Any(e => e.Id == id);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +11,14 @@ namespace TransNeftTest.Services
 {
     public interface IApiService
     {
+        public Task<ActionResult<List<ElectricityMeterViewModel>>> GetFreeElectricityMeters();
+        public Task<ActionResult<List<CurrentTransformerViewModel>>> GetFreeCurrentTransformers();
+        public Task<ActionResult<List<VoltageTransformerViewModel>>> GetFreeVoltageTransformers();
+
         public Task CreateMeterPoint(MeterPointDTO meterPointDto);
         public Task<List<CalcMeterViewModel>> GetCalcMetersByYear(int year);
-        public Task<List<ElectricityMeterViewModel>> GetElectricityMeterExpired();
-        public Task<List<VoltageTransformerViewModel>> GetVoltageTransformersByConsumer(string consumerName);
-        public Task<List<CurrentTransformerViewModel>> GetCurrentTransformersByConsumer(string consumerName);
+        public Task<List<ElectricityMeterViewModel>> GetEMExpiredByConsumer(ConsumerDTO consumerDto);
+        public Task<List<CurrentTransformerViewModel>> GetCTExpiredByConsumer(ConsumerDTO consumerDto);
+        public Task<List<VoltageTransformerViewModel>> GetVTExpiredByConsumer(ConsumerDTO consumerDto);
     }
 }

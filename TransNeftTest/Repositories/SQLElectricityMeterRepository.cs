@@ -8,6 +8,11 @@ namespace TransNeftTest.Repositories
 {
     public class SQLElectricityMeterRepository : IRepository<ElectricityMeter>
     {
+        private OrganizationContext _db;
+        public SQLElectricityMeterRepository(OrganizationContext context)
+        {
+            _db = context;
+        }
         public Task<ElectricityMeter> GetAsync(int id)
         {
             throw new NotImplementedException();

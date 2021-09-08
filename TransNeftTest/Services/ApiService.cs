@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,36 @@ namespace TransNeftTest.Services
         private IRepository<ElectricityMeter> _electricityMeterRepo = default(IRepository<ElectricityMeter>);
         private IRepository<VoltageTransformer> _voltageTransformerRepo = default(IRepository<VoltageTransformer>);
 
-        public Task CreateMeterPoint(MeterPointDTO meterPointDto)
+        public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetFreeElectricityMeters()
         {
-            throw new NotImplementedException();
+            var emList = await _electricityMeterRepo.GetListAsync();
+            var elMeters = emList.Where(em => em.MeterPoint == null).ToList();
+
+            return _mapper.Map<List<ElectricityMeter>, List<ElectricityMeterViewModel>>(elMeters);
         }
 
+        public async Task<ActionResult<List<CurrentTransformerViewModel>>> GetFreeCurrentTransformers()
+        {
+            var ctList = await _currentTransformerRepo.GetListAsync();
+            var cTranses = ctList.Where(ct => ct.MeterPoint == null).ToList();
+
+            return _mapper.Map<List<CurrentTransformer>, List<CurrentTransformerViewModel>>(cTranses);
+        }
+
+        public async Task<ActionResult<List<VoltageTransformerViewModel>>> GetFreeVoltageTransformers()
+        {
+            var vtList = await _voltageTransformerRepo.GetListAsync();
+            var vTranses = vtList.Where(vt => vt.MeterPoint == null).ToList();
+
+            return _mapper.Map<List<VoltageTransformer>, List<VoltageTransformerViewModel>>(vTranses);
+        }
+
+        public Task CreateMeterPoint(MeterPointDTO meterPointDto)
+        {
+            
+        }
+
+        // 222222222222222
         public async Task<List<CalcMeterViewModel>> GetCalcMetersByYear(int year)
         {
             var cmList = await _calcMeterRepo.GetListAsync();
@@ -32,26 +58,35 @@ namespace TransNeftTest.Services
             return _mapper.Map<List<CalcMeter>, List<CalcMeterViewModel>>(calcMeters);
         }
 
-        public async Task<List<CurrentTransformerViewModel>> GetCurrentTransformersByConsumer(string consumerName)
-        {
-            var ctList = await _currentTransformerRepo.GetListAsync();
-            var currentTransformers = ctList.Where(ct => ct.MeterPoint.Consumer.Name == consumerName).ToList();
-
-            return _mapper.Map<List<CurrentTransformer>, List<CurrentTransformerViewModel>>(currentTransformers);
-        }
-
-        public async Task<List<ElectricityMeterViewModel>> GetElectricityMeterExpired()
+        // 33333333333333
+        public async Task<List<ElectricityMeterViewModel>> GetEMExpiredByConsumer(ConsumerDTO consumerDto)
         {
             var emList = await _electricityMeterRepo.GetListAsync();
-            var emsExpired = emList.Where(em => em.CheckDate < DateTime.Now).ToList();
+            var emsExpired = emList.Where(em => em.MeterPoint.Consumer.Id == consumerDto.Id)
+                                   .Where(em => em.CheckDate < DateTime.Now)
+                                   .ToList();
 
             return _mapper.Map<List<ElectricityMeter>, List<ElectricityMeterViewModel>>(emsExpired);
         }
 
-        public async Task<List<VoltageTransformerViewModel>> GetVoltageTransformersByConsumer(string consumerName)
+        // 44444444444444
+        public async Task<List<CurrentTransformerViewModel>> GetCTExpiredByConsumer(ConsumerDTO consumerDto)
+        {
+            var ctList = await _currentTransformerRepo.GetListAsync();
+            var currentTransformers = ctList.Where(ct => ct.MeterPoint.Consumer.Id == consumerDto.Id)
+                                            .Where(ct => ct.CheckDate < DateTime.Now)
+                                            .ToList();
+
+            return _mapper.Map<List<CurrentTransformer>, List<CurrentTransformerViewModel>>(currentTransformers);
+        }
+
+        // 55555555555555555
+        public async Task<List<VoltageTransformerViewModel>> GetVTExpiredByConsumer(ConsumerDTO consumerDto)
         {
             var vtList = await _voltageTransformerRepo.GetListAsync();
-            var voltageTransformers = vtList.Where(vt => vt.MeterPoint.Consumer.Name == consumerName).ToList();
+            var voltageTransformers = vtList.Where(vt => vt.MeterPoint.Consumer.Id == consumerDto.Id)
+                                            .Where(vt => vt.CheckDate < DateTime.Now)
+                                            .ToList();
 
             return _mapper.Map<List<VoltageTransformer>, List<VoltageTransformerViewModel>>(voltageTransformers);
         }
