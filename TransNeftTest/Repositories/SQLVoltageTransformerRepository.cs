@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransNeftTest.DTOModels;
 using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
@@ -13,24 +15,38 @@ namespace TransNeftTest.Repositories
         {
             _db = context;
         }
-        public Task<VoltageTransformer> GetAsync(int id)
+
+        public async Task AddAsync(VoltageTransformer entity)
         {
-            throw new NotImplementedException();
+            await _db.AddAsync(entity);
+            await _db.SaveChangesAsync();
         }
 
-        public Task<IList<VoltageTransformer>> GetListAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<VoltageTransformer> GetAsync(int id) => await _db.VoltageTransformers
+            .Include(vt => vt.MeterPoint)
+            .FirstOrDefaultAsync(vt => vt.Id == id);
 
-        public Task SaveAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IList<VoltageTransformer>> GetListAsync() => await _db.VoltageTransformers
+            .Include(vt => vt.MeterPoint)
+            .ToListAsync();
 
-        public Task UpdateAsync(VoltageTransformer item)
+        public Task SaveAsync() => _db.SaveChangesAsync();
+
+        public async Task UpdateAsync(VoltageTransformer item)
         {
-            throw new NotImplementedException();
+            var voltageTransformerDb = await _db.VoltageTransformers.FindAsync(item.Id);
+            if (voltageTransformerDb == null)
+            {
+                throw new NotImplementedException();
+}
+
+            voltageTransformerDb.Number = item.Number;
+            voltageTransformerDb.CheckDate = item.CheckDate;
+            voltageTransformerDb.MeterPointId = item.MeterPointId;
+            voltageTransformerDb.MeterPoint = item.MeterPoint;
+            voltageTransformerDb.KTH = item.KTH;
+
+            await _db.SaveChangesAsync();
         }
     }
 }

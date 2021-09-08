@@ -18,6 +18,12 @@ namespace TransNeftTest.Repositories
             _db = context;
         }
 
+        public async Task AddAsync(MeterPoint entity)
+        {
+            await _db.MeterPoints.AddAsync(entity);
+            await _db.SaveChangesAsync();
+        }
+
         public async Task<MeterPoint> GetAsync(int meterPointId) => await _db.MeterPoints
             .Include(mp => mp.ElectricityMeter)
             .Include(mp => mp.CurrentTransformer)

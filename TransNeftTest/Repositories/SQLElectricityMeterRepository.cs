@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
 
@@ -9,28 +11,44 @@ namespace TransNeftTest.Repositories
     public class SQLElectricityMeterRepository : IRepository<ElectricityMeter>
     {
         private OrganizationContext _db;
+        private const string _messageElectricityMeterAbsent = "Запрошенного счётчика электроэнергии не найдено!";
+
         public SQLElectricityMeterRepository(OrganizationContext context)
         {
             _db = context;
         }
-        public Task<ElectricityMeter> GetAsync(int id)
+
+        public async Task AddAsync(ElectricityMeter entity)
         {
-            throw new NotImplementedException();
+            await _db.ElectricityMeters.AddAsync(entity);
+            await _db.SaveChangesAsync();
         }
 
-        public Task<IList<ElectricityMeter>> GetListAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<ElectricityMeter> GetAsync(int id) => await _db.ElectricityMeters
+            .Include(em => em.MeterPoint)
+            .FirstOrDefaultAsync(em => em.Id == id);
 
-        public Task SaveAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IList<ElectricityMeter>> GetListAsync() => await _db.ElectricityMeters
+            .Include(em => em.MeterPoint)
+            .ToListAsync();
 
-        public Task UpdateAsync(ElectricityMeter item)
+        public Task SaveAsync() => _db.SaveChangesAsync();
+
+        public async Task UpdateAsync(ElectricityMeter item)
         {
-            throw new NotImplementedException();
+            var electricityMeterDb = await _db.ElectricityMeters.FindAsync(item.Id);
+            if (electricityMeterDb == null)
+            {
+                throw new Exception(_messageElectricityMeterAbsent);
+            }
+
+            electricityMeterDb.Number = item.Number;
+            electricityMeterDb.CheckDate = item.CheckDate;
+            electricityMeterDb.MeterPointId = item.MeterPointId;
+            electricityMeterDb.MeterPoint = item.MeterPoint;
+            electricityMeterDb.Type = item.Type;
+
+            await _db.SaveChangesAsync();
         }
     }
 }

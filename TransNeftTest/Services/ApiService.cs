@@ -15,10 +15,12 @@ namespace TransNeftTest.Services
     public class ApiService : IApiService
     {
         private IMapper _mapper = default(Mapper);
-        private IRepository<CalcMeter> _calcMeterRepo = default(IRepository<CalcMeter>);
-        private IRepository<CurrentTransformer> _currentTransformerRepo = default(IRepository<CurrentTransformer>);
-        private IRepository<ElectricityMeter> _electricityMeterRepo = default(IRepository<ElectricityMeter>);
-        private IRepository<VoltageTransformer> _voltageTransformerRepo = default(IRepository<VoltageTransformer>);
+        
+        private IRepository<ElectricityMeter> _electricityMeterRepo = default;
+        private IRepository<CurrentTransformer> _currentTransformerRepo = default;
+        private IRepository<VoltageTransformer> _voltageTransformerRepo = default;
+        private IRepository<MeterPoint> _meterPointRepo = default;
+        private IRepository<CalcMeter> _calcMeterRepo = default;
 
         public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetFreeElectricityMeters()
         {
@@ -44,9 +46,11 @@ namespace TransNeftTest.Services
             return _mapper.Map<List<VoltageTransformer>, List<VoltageTransformerViewModel>>(vTranses);
         }
 
-        public Task CreateMeterPoint(MeterPointDTO meterPointDto)
+        // 1111111111111111
+        public async Task CreateMeterPoint(MeterPointDTO meterPointDto)
         {
-            
+            var meterPoint = _mapper.Map<MeterPointDTO, MeterPoint>(meterPointDto);
+            await _meterPointRepo.AddAsync(meterPoint);
         }
 
         // 222222222222222

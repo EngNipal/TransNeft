@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using TransNeftTest.DTOModels;
 using TransNeftTest.Models;
 using TransNeftTest.Services;
+using TransNeftTest.Validators;
 using TransNeftTest.ViewModels;
 
 namespace TransNeftTest.Controllers
@@ -19,6 +21,7 @@ namespace TransNeftTest.Controllers
     {
         private IApiService _apiService { get; set; }
         public MyController(IApiService apiService) => _apiService = apiService;
+        private int _minYear = 1900;
 
         // GET api/<MyController>
         [HttpGet]
@@ -41,39 +44,51 @@ namespace TransNeftTest.Controllers
             return await _apiService.GetFreeVoltageTransformers();
         }
 
+        // POST api/<MyController>
         [HttpPost]
-        public async Task<IActionResult> CreateMeterPoint(
-            CalcMeterDTO calcMeterDTO,
-            ElectricityMeterDTO electricityMeterDTO,
-            VoltageTransformerDTO voltageTransformerDTO)
+        public async Task<IActionResult> CreateMeterPoint(MeterPointDTO meterPointDTO)
         {
-            //TODO: ПРОВЕРКА ВХОДНЫХ ДАННЫХ!!!!!
-            var meterPointDTO = new MeterPointDTO()
+            var validator = new MeterPointValidator();
+            var validRes = validator.Validate(meterPointDTO);
+            if (!validRes.IsValid)
             {
-                CalcMeterId = calcMeterDTO.Id,
-                ElictricityMeterId = electricityMeterDTO.Id,
-                VoltageTransformerId = voltageTransformerDTO.Id
-            };
-            await _apiService.CreateMeterPoint(meterPointDTO);
-            //_context.MeterPoints.Add(meterPoint);
-            //await _context.SaveChangesAsync();
+                return BadRequest(validRes.Errors);
+            }
 
-            //return CreatedAtAction(nameof(GetMeterPoint), new { id = meterPoint.Id }, meterPoint);
+            try
+            {
+                await _apiService.CreateMeterPoint(meterPointDTO);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+
+            return Ok(meterPointDTO);
         }
 
         // GET api/<MyController>/2018
         [HttpGet("{year}")]
         public async Task<ActionResult<List<CalcMeterViewModel>>> GetCalcMetersByYear(int year)
         {
-            //TODO: ПРОВЕРКА ВХОДНЫХ ДАННЫХ!!!!!
+            if (year < _minYear)
+            {
+                return BadRequest($"Year must be greater than {_minYear}");
+            }
+
             return await _apiService.GetCalcMetersByYear(year);
         }
 
-        // GET api/<MyController>
+        // GET api/<MyController>/Рога_и_копыта
         [HttpGet("{consumerName}")]
         public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetEMExpiredByConsumer(ConsumerDTO consumerDto)
         {
-            //TODO: ПРОВЕРКА ВХОДНЫХ ДАННЫХ!!!!
+            var validRes = ValidateConsumer(consumerDto);
+            if (!validRes.IsValid)
+            {
+                return BadRequest(validRes.Errors);
+            }
+
             return await _apiService.GetEMExpiredByConsumer(consumerDto);
         }
 
@@ -81,7 +96,12 @@ namespace TransNeftTest.Controllers
         [HttpGet("{consumerName}")]
         public async Task<ActionResult<List<CurrentTransformerViewModel>>> GetCTExpiredByConsumer(ConsumerDTO consumerDto)
         {
-            //TODO: ПРОВЕРКА ВХОДНЫХ ДАННЫХ!!!!
+            var validRes = ValidateConsumer(consumerDto);
+            if (!validRes.IsValid)
+            {
+                return BadRequest(validRes.Errors);
+            }
+
             return await _apiService.GetCTExpiredByConsumer(consumerDto);
         }
 
@@ -89,8 +109,19 @@ namespace TransNeftTest.Controllers
         [HttpGet("{consumerName}")]
         public async Task<ActionResult<List<VoltageTransformerViewModel>>> GetVTExpiredByConsumer(ConsumerDTO consumerDto)
         {
-            //TODO: ПРОВЕРКА ВХОДНЫХ ДАННЫХ!!!!
+            var validRes = ValidateConsumer(consumerDto);
+            if (!validRes.IsValid)
+            {
+                return BadRequest(validRes.Errors);
+            }
+
             return await _apiService.GetVTExpiredByConsumer(consumerDto);
+        }
+
+        private ValidationResult ValidateConsumer (ConsumerDTO consumerDTO)
+        {
+            var validator = new ConsumerValidator();
+            return validator.Validate(consumerDTO);
         }
     }
 }
