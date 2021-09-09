@@ -17,12 +17,6 @@ namespace TransNeftTest.Validators
             RuleFor(o => o.Id).NotEmpty();
             RuleFor(o => o.Name).NotEmpty();//.WithMessage(_emptyNameMessage);
             RuleFor(o => o.Address).NotEmpty();//.WithMessage(_emptyAddressMessage);
-            RuleFor(o => o).SetInheritanceValidator(v =>
-            {
-                v.Add(new HoldingValidator());
-                v.Add(new SubsidiaryValidator());
-                v.Add(new ConsumerValidator());
-            });
         }
     }
 }

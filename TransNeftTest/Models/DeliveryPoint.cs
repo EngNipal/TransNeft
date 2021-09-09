@@ -17,9 +17,9 @@ namespace TransNeftTest.Models
         public int CalcMeterId { get; set; }
         /// <summary> Расчётный прибор учёта </summary>
         public CalcMeter CalcMeter { get; set; }
-        /// <summary> Id организации-владельца </summary>
-        public int ConsumerId { get; set; }
-        /// <summary> Организация-владелец </summary>
-        public Consumer Consumer { get; set; }
+        /// <summary> Id потребителя </summary>
+        public int EObjectId { get; set; }
+        /// <summary> Потребитель </summary>
+        public EObject EObject { get; set; }
     }
 }

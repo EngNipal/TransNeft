@@ -16,6 +16,6 @@ namespace TransNeftTest.DTOModels
         /// <summary> Id расчётного прибора учёта </summary>
         public int CalcMeterId { get; set; }
         /// <summary> Id организации-владельца </summary>
-        public int ConsumerId { get; set; }
+        public int EObjectId { get; set; }
     }
 }

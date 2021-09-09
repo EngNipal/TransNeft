@@ -24,9 +24,9 @@ namespace TransNeftTest.Models
         /// <summary> Трансформатор напряжения </summary>
         public VoltageTransformer VoltageTransformer { get; set; }
         /// <summary> Id объекта потребления. </summary>
-        public int ConsumerId { get; set; }
+        public int EObjectId { get; set; }
         /// <summary> Объект потребления. </summary>
-        public Consumer Consumer { get; set; }
+        public EObject EObject { get; set; }
         /// <summary> Id расчётного прибора учёта. </summary>
         public int CalcMeterId { get; set; }
         /// <summary> Расчётный прибор учёта. </summary>

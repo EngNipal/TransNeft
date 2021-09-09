@@ -6,25 +6,28 @@ using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLSubsidiaryRepository : IRepository<Subsidiary>
+    public class SQLEObjectRepository : IRepository<EObject>
     {
         private OrganizationContext _db;
-        public SQLSubsidiaryRepository(OrganizationContext context)
+        private const string _messageEObjectAbsent = "Запрошенного потребителя не найдено!";
+
+        public SQLEObjectRepository(OrganizationContext context)
         {
             _db = context;
         }
 
-        public Task AddAsync(Subsidiary entity)
+        public async Task AddAsync(EObject entity)
+        {
+            await _db.EObjects.AddAsync(entity);
+            await _db.SaveChangesAsync();
+        }
+
+        public Task<EObject> GetAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Subsidiary> GetAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<Subsidiary>> GetListAsync()
+        public Task<IList<EObject>> GetListAsync()
         {
             throw new NotImplementedException();
         }
@@ -34,7 +37,7 @@ namespace TransNeftTest.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(Subsidiary item)
+        public Task UpdateAsync(EObject entity)
         {
             throw new NotImplementedException();
         }

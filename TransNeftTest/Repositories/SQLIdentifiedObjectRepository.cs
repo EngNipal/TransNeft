@@ -6,25 +6,24 @@ using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLHoldingRepository : IRepository<Holding>
+    public class SQLIdentifiedObjectRepository : IRepository<IdentifiedObject>
     {
         private OrganizationContext _db;
-        public SQLHoldingRepository(OrganizationContext context)
+        public SQLIdentifiedObjectRepository(OrganizationContext context)
         {
             _db = context;
         }
-
-        public Task AddAsync(Holding entity)
+        public Task AddAsync(IdentifiedObject entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Holding> GetAsync(int id)
+        public Task<IdentifiedObject> GetAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IList<Holding>> GetListAsync()
+        public Task<IList<IdentifiedObject>> GetListAsync()
         {
             throw new NotImplementedException();
         }
@@ -34,7 +33,7 @@ namespace TransNeftTest.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(Holding item)
+        public Task UpdateAsync(IdentifiedObject entity)
         {
             throw new NotImplementedException();
         }

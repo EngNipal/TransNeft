@@ -17,7 +17,7 @@ namespace TransNeftTest.Validators
             RuleFor(mp => mp.ElictricityMeterId).NotEmpty();
             RuleFor(mp => mp.CurrentTransformerId).NotEmpty();
             RuleFor(mp => mp.VoltageTransformerId).NotEmpty();
-            RuleFor(dp => dp.ConsumerId).NotEmpty();
+            RuleFor(dp => dp.EObjectId).NotEmpty();
             RuleFor(dp => dp.CalcMeterId).NotEmpty();
         }
     }

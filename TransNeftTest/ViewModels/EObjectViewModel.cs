@@ -6,11 +6,11 @@ using TransNeftTest.Models;
 
 namespace TransNeftTest.ViewModels
 {
-    public class ConsumerViewModel : OrganizationViewModel
+    public class EObjectViewModel : IdentifiedObjectViewModel
     {
         /// <summary> Id организации-владельца </summary>
-        public int SubsidiaryId { get; set; }
+        public int ParentOrganizationId { get; set; }
         /// <summary> Название организации-владельца </summary>
-        public string SubsidiaryName { get; set; }
+        public string ParentOrganizationName { get; set; }
     }
 }

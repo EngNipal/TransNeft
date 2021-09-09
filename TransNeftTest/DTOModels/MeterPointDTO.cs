@@ -19,7 +19,7 @@ namespace TransNeftTest.DTOModels
         /// <summary> Id трансформатора напряжения </summary>
         public int VoltageTransformerId { get; set; }
         /// <summary> Id объекта потребления. </summary>
-        public int ConsumerId { get; set; }
+        public int EObjectId { get; set; }
         /// <summary> Id расчётного прибора учёта. </summary>
         public int CalcMeterId { get; set; }
     }

@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 namespace TransNeftTest.Models
 {
     /// <summary> Организация </summary>
-    public class Organization
+    public class Organization : IdentifiedObject
     {
-        public int Id { get; set; }
-        /// <summary> Название </summary>
-        public string Name { get; set; }
-        /// <summary> Адрес </summary>
-        public string Address { get; set; }
+        /// <summary> Дочерние организации </summary>
+        public List<Organization> ChildrenOrganizations {  get; set; }
+        /// <summary> Потребители </summary>
+        public List<EObject> EObjects {  get; set; }
+        /// <summary> Id организации-владельца </summary>
+        public int? ParentOrganizationID { get; set; }
+        /// <summary> Организация-владелец </summary>
+        public Organization ParentOrganization { get; set; }
     }
 }

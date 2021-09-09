@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Models
 {
-    /// <summary> Объект потребления. </summary>
-    public class Consumer : Organization 
+    /// <summary> Потребитель </summary>
+    public class EObject : IdentifiedObject
     {
         /// <summary> Список точек измерения </summary>
         public List<MeterPoint> MeterPoints { get; set; } = new List<MeterPoint>();
         /// <summary> Список точек доставки </summary>
         public List<DeliveryPoint> DeliveryPoints { get; set; } = new List<DeliveryPoint>();
         /// <summary> Id организации-владельца </summary>
-        public int SubsidiaryId { get; set; }
+        public int ParentOrganizationId { get; set; }
         /// <summary> Организация-владелец </summary>
-        public Subsidiary Subsidiary { get; set; }
+        public Organization ParentOrganization { get; set; }
     }
 }

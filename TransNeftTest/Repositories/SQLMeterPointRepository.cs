@@ -28,7 +28,7 @@ namespace TransNeftTest.Repositories
             .Include(mp => mp.ElectricityMeter)
             .Include(mp => mp.CurrentTransformer)
             .Include(mp => mp.VoltageTransformer)
-            .Include(mp => mp.Consumer)
+            .Include(mp => mp.EObject)
             .Include(mp => mp.CalcMeter)
             .FirstOrDefaultAsync(mp => mp.Id == meterPointId);
 
@@ -36,7 +36,7 @@ namespace TransNeftTest.Repositories
             .Include(mp => mp.ElectricityMeter)
             .Include(mp => mp.CurrentTransformer)
             .Include(mp => mp.VoltageTransformer)
-            .Include(mp => mp.Consumer)
+            .Include(mp => mp.EObject)
             .Include(mp => mp.CalcMeter)
             .ToListAsync();
 
@@ -54,7 +54,7 @@ namespace TransNeftTest.Repositories
             meterPointDb.ElectricityMeter = item.ElectricityMeter;
             meterPointDb.CurrentTransformer = item.CurrentTransformer;
             meterPointDb.VoltageTransformer = item.VoltageTransformer;
-            meterPointDb.Consumer = item.Consumer;
+            meterPointDb.EObject = item.EObject;
             meterPointDb.CalcMeter = item.CalcMeter;
 
             await _db.SaveChangesAsync();

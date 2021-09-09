@@ -24,9 +24,9 @@ namespace TransNeftTest.ViewModels
         /// <summary> Номер трансформатора напряжения </summary>
         public string VoltageTransformerNumber { get; set; }
         /// <summary> Id объекта потребления. </summary>
-        public int ConsumerId { get; set; }
+        public int EObjectId { get; set; }
         /// <summary> Название объекта потребления. </summary>
-        public string ConsumerName { get; set; }
+        public string EObjectName { get; set; }
         /// <summary> Id расчётного прибора учёта. </summary>
         public int CalcMeterId { get; set; }
         /// <summary> Номер расчётного прибор учёта. </summary>

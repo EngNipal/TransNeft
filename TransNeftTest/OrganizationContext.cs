@@ -13,9 +13,8 @@ namespace TransNeftTest
     public class OrganizationContext : DbContext
     {
         public DbSet<Organization> Organizations { get; set; }
-        public DbSet<Holding> Holdings { get; set; }
-        public DbSet<Subsidiary> Subsidiaries { get; set; }
-        public DbSet<Consumer> Consumers { get; set; }
+        public DbSet<IdentifiedObject> IdentifiedObjects { get; set; }
+        public DbSet<EObject> EObjects { get; set; }
         public DbSet<MeterPoint> MeterPoints { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
         public DbSet<ElectricityMeter> ElectricityMeters { get; set; }
@@ -33,28 +32,28 @@ namespace TransNeftTest
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Holding>()
-                .HasMany(h => h.Subsidiaries)
-                .WithOne(s => s.Holding)
-                .HasForeignKey(s => s.HoldingId)
+            modelBuilder.Entity<Organization>()
+                .HasMany(o => o.ChildrenOrganizations)
+                .WithOne(co => co.ParentOrganization)
+                .HasForeignKey(co => co.ParentOrganizationID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Subsidiary>()
-                .HasMany(s => s.Consumers)
-                .WithOne(c => c.Subsidiary)
-                .HasForeignKey(c => c.SubsidiaryId)
+            modelBuilder.Entity<EObject>()
+                .HasOne(e => e.ParentOrganization)
+                .WithMany(po => po.EObjects)
+                .HasForeignKey(po => po.ParentOrganizationId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<MeterPoint>()
-                .HasOne(mp => mp.Consumer)
+                .HasOne(mp => mp.EObject)
                 .WithMany(c => c.MeterPoints)
-                .HasForeignKey(mp => mp.ConsumerId)
+                .HasForeignKey(mp => mp.EObjectId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DeliveryPoint>()
-                .HasOne(dp => dp.Consumer)
+                .HasOne(dp => dp.EObject)
                 .WithMany(c => c.DeliveryPoints)
-                .HasForeignKey(dp => dp.ConsumerId)
+                .HasForeignKey(dp => dp.EObjectId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ElectricityMeter>()

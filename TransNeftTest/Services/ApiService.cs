@@ -66,7 +66,7 @@ namespace TransNeftTest.Services
         public async Task<List<ElectricityMeterViewModel>> GetEMExpiredByConsumer(ConsumerDTO consumerDto)
         {
             var emList = await _electricityMeterRepo.GetListAsync();
-            var emsExpired = emList.Where(em => em.MeterPoint.Consumer.Id == consumerDto.Id)
+            var emsExpired = emList.Where(em => em.MeterPoint.EObject.Id == consumerDto.Id)
                                    .Where(em => em.CheckDate < DateTime.Now)
                                    .ToList();
 
@@ -77,7 +77,7 @@ namespace TransNeftTest.Services
         public async Task<List<CurrentTransformerViewModel>> GetCTExpiredByConsumer(ConsumerDTO consumerDto)
         {
             var ctList = await _currentTransformerRepo.GetListAsync();
-            var currentTransformers = ctList.Where(ct => ct.MeterPoint.Consumer.Id == consumerDto.Id)
+            var currentTransformers = ctList.Where(ct => ct.MeterPoint.EObject.Id == consumerDto.Id)
                                             .Where(ct => ct.CheckDate < DateTime.Now)
                                             .ToList();
 
@@ -88,7 +88,7 @@ namespace TransNeftTest.Services
         public async Task<List<VoltageTransformerViewModel>> GetVTExpiredByConsumer(ConsumerDTO consumerDto)
         {
             var vtList = await _voltageTransformerRepo.GetListAsync();
-            var voltageTransformers = vtList.Where(vt => vt.MeterPoint.Consumer.Id == consumerDto.Id)
+            var voltageTransformers = vtList.Where(vt => vt.MeterPoint.EObject.Id == consumerDto.Id)
                                             .Where(vt => vt.CheckDate < DateTime.Now)
                                             .ToList();
 

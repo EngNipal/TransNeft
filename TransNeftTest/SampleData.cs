@@ -13,17 +13,17 @@ namespace TransNeftTest
             if (!context.Holdings.Any())
             {
                 context.Holdings.Add(
-                    new Holding
+                    new IdentifiedObject
                     {
                         Name = "Транснефть",
                         Address = "123112, г. Москва, Пресненская набережная, д. 4, стр. 2"
                     });
             }
 
-            if (!context.Subsidiaries.Any())
+            if (!context.EObjects.Any())
             {
-                context.Subsidiaries.Add(
-                    new Subsidiary
+                context.EObjects.Add(
+                    new EObject
                     {
                         Name = "ТранснефтьЭнерго",
                         Address = "123112, Москва, Пресненская наб., д.4, стр.2, башня \"Эволюция\"",

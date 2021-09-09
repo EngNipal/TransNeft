@@ -28,10 +28,10 @@ namespace TransNeftTest
             services.AddScoped<IRepository<DeliveryPoint>, SQLDeliveryPointRepository>();
             services.AddScoped<IRepository<Device>, SQLDeviceRepository>();
             services.AddScoped<IRepository<ElectricityMeter>, SQLElectricityMeterRepository>();
-            services.AddScoped<IRepository<Holding>, SQLHoldingRepository>();
+            services.AddScoped<IRepository<IdentifiedObject>, SQLHoldingRepository>();
             services.AddScoped<IRepository<MeterPoint>, SQLMeterPointRepository>();
             services.AddScoped<IRepository<Organization>, SQLOrganizationRepository>();
-            services.AddScoped<IRepository<Subsidiary>, SQLSubsidiaryRepository>();
+            services.AddScoped<IRepository<EObject>, SQLSubsidiaryRepository>();
             services.AddScoped<IRepository<VoltageTransformer>, SQLVoltageTransformerRepository>();
         }
     }

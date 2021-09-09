@@ -18,10 +18,10 @@ namespace TransNeftTest
             CreateMap<CalcMeterViewModel, CalcMeter>();
             CreateMap<CalcMeterDTO, CalcMeter>();
 
-            // Consumer
-            CreateMap<Consumer, ConsumerViewModel>();
-            CreateMap<ConsumerViewModel, Consumer>();
-            CreateMap<ConsumerDTO, Consumer>();
+            // EObject
+            CreateMap<EObject, ConsumerViewModel>();
+            CreateMap<ConsumerViewModel, EObject>();
+            CreateMap<ConsumerDTO, EObject>();
 
             // CurrentTransformer
             CreateMap<CurrentTransformer, CurrentTransformerViewModel>();
@@ -44,9 +44,9 @@ namespace TransNeftTest
             CreateMap<ElectricityMeterDTO, ElectricityMeter>();
 
             // Holding
-            CreateMap<Holding, HoldingViewModel>();
-            CreateMap<HoldingViewModel, Holding>();
-            CreateMap<HoldingDTO, Holding>();
+            CreateMap<IdentifiedObject, HoldingViewModel>();
+            CreateMap<HoldingViewModel, IdentifiedObject>();
+            CreateMap<HoldingDTO, IdentifiedObject>();
 
             // MeterPoint
             CreateMap<MeterPoint, MeterPointViewModel>();
@@ -59,9 +59,9 @@ namespace TransNeftTest
             CreateMap<OrganizationDTO, Organization>();
 
             // Subsidiary
-            CreateMap<Subsidiary, SubsidiaryViewModel>();
-            CreateMap<SubsidiaryViewModel, Subsidiary>();
-            CreateMap<SubsidiaryDTO, Subsidiary>();
+            CreateMap<EObject, SubsidiaryViewModel>();
+            CreateMap<SubsidiaryViewModel, EObject>();
+            CreateMap<SubsidiaryDTO, EObject>();
 
             // VoltageTransformer
             CreateMap<VoltageTransformer, VoltageTransformerViewModel>();

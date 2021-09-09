@@ -12,7 +12,7 @@ namespace TransNeftTest.Validators
             RuleFor(dp => dp.Name).NotEmpty();
             RuleFor(dp => dp.MaxPower).GreaterThan(0);
             RuleFor(dp => dp.CalcMeterId).NotEmpty();
-            RuleFor(dp => dp.ConsumerId).NotEmpty();
+            RuleFor(dp => dp.EObjectId).NotEmpty();
         }
     }
 }
