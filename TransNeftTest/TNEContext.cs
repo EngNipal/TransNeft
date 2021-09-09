@@ -4,7 +4,7 @@ using TransNeftTest.Models;
 namespace TransNeftTest
 {
     /// <summary> Контекст данных модели. </summary>
-    public class OrganizationContext : DbContext
+    public class TNEContext : DbContext
     {
         public DbSet<IdentifiedObject> IdentifiedObjects { get; set; }
         public DbSet<Organization> Organizations { get; set; }
@@ -19,9 +19,8 @@ namespace TransNeftTest
 
 
 
-        public OrganizationContext(DbContextOptions<OrganizationContext> options) : base(options)
+        public TNEContext(DbContextOptions<TNEContext> options) : base(options)
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

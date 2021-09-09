@@ -28,7 +28,7 @@ namespace TransNeftTest
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddServiceProfile();
-            services.AddDbContext<OrganizationContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<TNEContext>(options => options.UseSqlServer(connection));
 
             services.AddControllersWithViews();
 
@@ -53,6 +53,7 @@ namespace TransNeftTest
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStaticFiles();
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {

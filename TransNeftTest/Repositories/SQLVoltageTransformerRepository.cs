@@ -8,8 +8,8 @@ namespace TransNeftTest.Repositories
 {
     public class SQLVoltageTransformerRepository : IRepository<VoltageTransformer>
     {
-        private OrganizationContext _db;
-        public SQLVoltageTransformerRepository(OrganizationContext context)
+        private TNEContext _db;
+        public SQLVoltageTransformerRepository(TNEContext context)
         {
             _db = context;
         }

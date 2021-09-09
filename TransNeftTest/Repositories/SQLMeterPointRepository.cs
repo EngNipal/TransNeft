@@ -8,10 +8,10 @@ namespace TransNeftTest.Repositories
 {
     public class SQLMeterPointRepository : IRepository<MeterPoint>
     {
-        private OrganizationContext _db;
+        private TNEContext _db;
         private const string _messageMeterPointAbsent = "Запрошенной точки измерения не найдено!";
 
-        public SQLMeterPointRepository(OrganizationContext context)
+        public SQLMeterPointRepository(TNEContext context)
         {
             _db = context;
         }

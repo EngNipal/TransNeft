@@ -8,10 +8,10 @@ namespace TransNeftTest.Repositories
 {
     public class SQLElectricityMeterRepository : IRepository<ElectricityMeter>
     {
-        private OrganizationContext _db;
+        private TNEContext _db;
         private const string _messageElectricityMeterAbsent = "Запрошенного счётчика электроэнергии не найдено!";
 
-        public SQLElectricityMeterRepository(OrganizationContext context)
+        public SQLElectricityMeterRepository(TNEContext context)
         {
             _db = context;
         }

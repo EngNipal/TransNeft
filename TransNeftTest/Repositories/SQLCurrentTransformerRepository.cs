@@ -8,8 +8,8 @@ namespace TransNeftTest.Repositories
 {
     public class SQLCurrentTransformerRepository : IRepository<CurrentTransformer>
     {
-        private OrganizationContext _db;
-        public SQLCurrentTransformerRepository(OrganizationContext context)
+        private TNEContext _db;
+        public SQLCurrentTransformerRepository(TNEContext context)
         {
             _db = context;
         }

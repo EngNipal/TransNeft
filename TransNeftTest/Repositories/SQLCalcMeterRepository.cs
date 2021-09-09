@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
 
@@ -8,10 +9,10 @@ namespace TransNeftTest.Repositories
 {
     public class SQLCalcMeterRepository : IRepository<CalcMeter>
     {
-        private OrganizationContext _db;
+        private TNEContext _db;
         private const string _messageCalcMeterAbsent = "Запрошенного расчётного прибора учёта не найдено!";
 
-        public SQLCalcMeterRepository(OrganizationContext context)
+        public SQLCalcMeterRepository(TNEContext context)
         {
             _db = context;
         }

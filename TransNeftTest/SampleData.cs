@@ -6,7 +6,7 @@ namespace TransNeftTest
 {
     public static class SampleData
     {
-        public static void Initialize(OrganizationContext context)
+        public static void Initialize(TNEContext context)
         {
             if (!context.Organizations.Any())
             {
@@ -72,6 +72,12 @@ namespace TransNeftTest
                         CheckDate = new DateTime(2022, 01, 01),
                         Type = "Тип-2",
                         MeterPointId = 2
+                    },
+                    new ElectricityMeter()
+                    {
+                        Number = "Счётчик-3",
+                        CheckDate = new DateTime(2023, 01, 01),
+                        Type = "Тип-3"
                     });
             }
 
@@ -91,6 +97,12 @@ namespace TransNeftTest
                         CheckDate = new DateTime(2022, 02, 02),
                         KTT = 1.41,
                         MeterPointId = 2
+                    },
+                    new CurrentTransformer()
+                    {
+                        Number = "Трансформатор тока-3",
+                        CheckDate = new DateTime(2023, 02, 02),
+                        KTT = 3.14,
                     });
             }
 
@@ -99,16 +111,23 @@ namespace TransNeftTest
                 context.VoltageTransformers.AddRange(
                     new VoltageTransformer()
                     {
-                        Number = "Трансформатор тока-1",
+                        Number = "Трансформатор напряжения-1",
                         CheckDate = new DateTime(2018, 03, 03),
                         KTH = 1.73,
                         MeterPointId = 1
                     },
                     new VoltageTransformer()
                     {
-                        Number = "Трансформатор тока-2",
+                        Number = "Трансформатор напряжения-2",
                         CheckDate = new DateTime(2022, 03, 03),
                         KTH = 1.41,
+                        MeterPointId = 2
+                    },
+                    new VoltageTransformer()
+                    {
+                        Number = "Трансформатор напряжения-3",
+                        CheckDate = new DateTime(2023, 03, 03),
+                        KTH = 3.14,
                         MeterPointId = 2
                     });
             }
@@ -131,8 +150,8 @@ namespace TransNeftTest
                     new CalcMeter()
                     {
                         Number = "3-2018",
-                        StartDate = new DateTime(2018, 12, 14),
-                        EndDate = new DateTime(2019, 06, 05)
+                        StartDate = new DateTime(2018, 06, 05),
+                        EndDate = new DateTime(2018, 12, 13)
                     });
             }
 
