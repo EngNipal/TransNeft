@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +13,31 @@ namespace TransNeftTest.Services
 {
     public class ApiService : IApiService
     {
-        private IMapper _mapper = default(Mapper);
+        private IMapper _mapper;
         
-        private IRepository<ElectricityMeter> _electricityMeterRepo = default;
-        private IRepository<CurrentTransformer> _currentTransformerRepo = default;
-        private IRepository<VoltageTransformer> _voltageTransformerRepo = default;
-        private IRepository<MeterPoint> _meterPointRepo = default;
-        private IRepository<CalcMeter> _calcMeterRepo = default;
+        private IRepository<ElectricityMeter> _electricityMeterRepo;
+        private IRepository<CurrentTransformer> _currentTransformerRepo;
+        private IRepository<VoltageTransformer> _voltageTransformerRepo;
+        private IRepository<MeterPoint> _meterPointRepo;
+        private IRepository<CalcMeter> _calcMeterRepo;
+
+
+
+        public ApiService(
+            IRepository<ElectricityMeter> emRepo,
+            IRepository<CurrentTransformer> ctRepo,
+            IRepository<VoltageTransformer> vtRepo,
+            IRepository<MeterPoint> mpRepo,
+            IRepository<CalcMeter> cmRepo,
+            IMapper mapper)
+        {
+            _electricityMeterRepo = emRepo;
+            _currentTransformerRepo = ctRepo;
+            _voltageTransformerRepo = vtRepo;
+            _meterPointRepo = mpRepo;
+            _calcMeterRepo = cmRepo;
+            _mapper = mapper;
+        }
 
         public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetFreeElectricityMeters()
         {
