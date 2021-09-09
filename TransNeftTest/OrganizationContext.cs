@@ -45,6 +45,11 @@ namespace TransNeftTest
                 .HasForeignKey(mp => mp.EObjectId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<MeterPoint>()
+                .HasOne(mp => mp.CalcMeter)
+                .WithOne(cm => cm.MeterPoint)
+                .HasForeignKey<MeterPoint>(mp => mp.CalcMeterId);
+
             modelBuilder.Entity<DeliveryPoint>()
                 .HasOne(dp => dp.EObject)
                 .WithMany(c => c.DeliveryPoints)
@@ -73,8 +78,12 @@ namespace TransNeftTest
                 .HasOne(cm => cm.DeliveryPoint)
                 .WithOne(dp => dp.CalcMeter)
                 .HasForeignKey<CalcMeter>(cm => cm.DeliveryPointId)
-                .HasForeignKey<CalcMeter>(cm => cm.MeterPointId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CalcMeter>()
+                .HasOne(cm => cm.MeterPoint)
+                .WithOne(mp => mp.CalcMeter)
+                .HasForeignKey<CalcMeter>(cm => cm.MeterPointId);
         }
     }
 }
