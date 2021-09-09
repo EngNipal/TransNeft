@@ -7,14 +7,14 @@ using TransNeftTest.ViewModels;
 
 namespace TransNeftTest.Services
 {
-    public class SubsidiaryService : ISubsidiaryService
+    public class EObjectService : IEObjectService
     {
-        public Task<SubsidiaryViewModel> GetAsync(int id)
+        public Task<EObjectViewModel> GetAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IList<SubsidiaryViewModel>> GetListAsync()
+        public Task<IList<EObjectViewModel>> GetListAsync()
         {
             throw new NotImplementedException();
         }
@@ -24,7 +24,7 @@ namespace TransNeftTest.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(SubsidiaryDTO subsidiaryDTO)
+        public Task UpdateAsync(EObjectDTO eObjectDTO)
         {
             throw new NotImplementedException();
         }

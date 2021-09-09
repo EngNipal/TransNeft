@@ -12,13 +12,13 @@ namespace TransNeftTest
     /// <summary> Контекст данных модели. </summary>
     public class OrganizationContext : DbContext
     {
-        public DbSet<Organization> Organizations { get; set; }
         public DbSet<IdentifiedObject> IdentifiedObjects { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
         public DbSet<EObject> EObjects { get; set; }
         public DbSet<MeterPoint> MeterPoints { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
-        public DbSet<ElectricityMeter> ElectricityMeters { get; set; }
         public DbSet<Device> Devices { get; set; }
+        public DbSet<ElectricityMeter> ElectricityMeters { get; set; }
         public DbSet<CurrentTransformer> CurrentTransformers { get; set; }
         public DbSet<VoltageTransformer> VoltageTransformers { get; set; }
         public DbSet<CalcMeter> CalcMeters { get; set; }
@@ -27,6 +27,7 @@ namespace TransNeftTest
 
         public OrganizationContext(DbContextOptions<OrganizationContext> options) : base(options)
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -35,7 +36,7 @@ namespace TransNeftTest
             modelBuilder.Entity<Organization>()
                 .HasMany(o => o.ChildrenOrganizations)
                 .WithOne(co => co.ParentOrganization)
-                .HasForeignKey(co => co.ParentOrganizationID)
+                .HasForeignKey(co => co.ParentOrganizationId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<EObject>()

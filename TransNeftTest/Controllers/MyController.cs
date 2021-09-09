@@ -45,7 +45,7 @@ namespace TransNeftTest.Controllers
         }
 
         // POST api/<MyController>
-        [HttpPost]
+        [HttpPost("{meterPointDTO}")]
         public async Task<IActionResult> CreateMeterPoint(MeterPointDTO meterPointDTO)
         {
             var validator = new MeterPointValidator();
@@ -79,49 +79,49 @@ namespace TransNeftTest.Controllers
             return await _apiService.GetCalcMetersByYear(year);
         }
 
-        // GET api/<MyController>/Рога_и_копыта
-        [HttpGet("{consumerName}")]
-        public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetEMExpiredByConsumer(ConsumerDTO consumerDto)
+        // GET api/<MyController>/eObjectDto
+        [HttpGet("{eObjectDto}")]
+        public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetEMExpiredByEObject(EObjectDTO eObjectDto)
         {
-            var validRes = ValidateConsumer(consumerDto);
+            var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)
             {
                 return BadRequest(validRes.Errors);
             }
 
-            return await _apiService.GetEMExpiredByConsumer(consumerDto);
+            return await _apiService.GetEMExpiredByEObject(eObjectDto);
         }
 
-        // GET api/<MyController>/Рога_и_копыта
-        [HttpGet("{consumerName}")]
-        public async Task<ActionResult<List<CurrentTransformerViewModel>>> GetCTExpiredByConsumer(ConsumerDTO consumerDto)
+        // GET api/<MyController>/eObjectDto
+        [HttpGet("{eObjectDto}")]
+        public async Task<ActionResult<List<CurrentTransformerViewModel>>> GetCTExpiredByEObject(EObjectDTO eObjectDto)
         {
-            var validRes = ValidateConsumer(consumerDto);
+            var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)
             {
                 return BadRequest(validRes.Errors);
             }
 
-            return await _apiService.GetCTExpiredByConsumer(consumerDto);
+            return await _apiService.GetCTExpiredByEObject(eObjectDto);
         }
 
-        // GET api/<MyController>/Рога_и_копыта
-        [HttpGet("{consumerName}")]
-        public async Task<ActionResult<List<VoltageTransformerViewModel>>> GetVTExpiredByConsumer(ConsumerDTO consumerDto)
+        // GET api/<MyController>/eObjectDto
+        [HttpGet("{eObjectDto}")]
+        public async Task<ActionResult<List<VoltageTransformerViewModel>>> GetVTExpiredByEObject(EObjectDTO eObjectDto)
         {
-            var validRes = ValidateConsumer(consumerDto);
+            var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)
             {
                 return BadRequest(validRes.Errors);
             }
 
-            return await _apiService.GetVTExpiredByConsumer(consumerDto);
+            return await _apiService.GetVTExpiredByEObject(eObjectDto);
         }
 
-        private ValidationResult ValidateConsumer (ConsumerDTO consumerDTO)
+        private ValidationResult ValidateEObject(EObjectDTO eObjectDto)
         {
-            var validator = new ConsumerValidator();
-            return validator.Validate(consumerDTO);
+            var validator = new EObjectValidator();
+            return validator.Validate(eObjectDto);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TransNeftTest.Models
         /// <summary> Потребители </summary>
         public List<EObject> EObjects {  get; set; }
         /// <summary> Id организации-владельца </summary>
-        public int? ParentOrganizationID { get; set; }
+        public int? ParentOrganizationId { get; set; }
         /// <summary> Организация-владелец </summary>
         public Organization ParentOrganization { get; set; }
     }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TransNeftTest.DTOModels;
+using TransNeftTest.Models;
 using TransNeftTest.ViewModels;
 
 namespace TransNeftTest.Services
 {
-    public interface IConsumerService : IService<ConsumerViewModel>
+    public interface IEObjectService : IService<EObjectViewModel>
     {
-        public Task UpdateAsync(ConsumerDTO consumerDTO);
+        public Task UpdateAsync(EObjectDTO eObjectDTO);
     }
 }

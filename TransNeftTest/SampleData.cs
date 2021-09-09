@@ -10,47 +10,132 @@ namespace TransNeftTest
     {
         public static void Initialize(OrganizationContext context)
         {
-            if (!context.Holdings.Any())
+            if (!context.Organizations.Any())
             {
-                context.Holdings.Add(
-                    new IdentifiedObject
+                context.Organizations.AddRange(
+                    new Organization()
                     {
                         Name = "Транснефть",
                         Address = "123112, г. Москва, Пресненская набережная, д. 4, стр. 2"
+                    },
+                    new Organization()
+                    {
+                        Name = "ТранснефтьЭнерго",
+                        Address = "123112, Москва, Пресненская наб., д.4, стр.2, башня \"Эволюция\"",
+                        ParentOrganizationId = 1
                     });
             }
 
             if (!context.EObjects.Any())
             {
-                context.EObjects.Add(
-                    new EObject
-                    {
-                        Name = "ТранснефтьЭнерго",
-                        Address = "123112, Москва, Пресненская наб., д.4, стр.2, башня \"Эволюция\"",
-                        HoldingId = 1
-                    });
-            }
-
-            if (!context.Consumers.Any())
-            {
-                context.Consumers.AddRange(
-                    new Consumer
+                context.EObjects.AddRange(
+                    new EObject()
                     {
                         Name = "ПС 110/10 Весна",
                         Address = "В деревне у дедушки",
-                        SubsidiaryId = 1
+                        ParentOrganizationId = 2
                     },
-                    new Consumer
+                    new EObject()
                     {
                         Name = "Потребитель-1",
                         Address = "Адрес потребителя-1",
-                        SubsidiaryId = 1
+                        ParentOrganizationId = 2
                     });
             }
 
             if (!context.MeterPoints.Any())
             {
+                context.MeterPoints.AddRange(
+                    new MeterPoint()
+                    {
+                        Name = "Точка измерения-1",
+                        EObjectId = 1
+                    },
+                    new MeterPoint()
+                    {
+                        Name = "Точка измерения-2",
+                        EObjectId = 2
+                    });
+            }
 
+            if (!context.ElectricityMeters.Any())
+            {
+                context.ElectricityMeters.AddRange(
+                    new ElectricityMeter()
+                    {
+                        Number = "Счётчик-1",
+                        CheckDate = new DateTime(2018, 01, 01),
+                        Type = "Тип-1",
+                        MeterPointId = 1
+                    },
+                    new ElectricityMeter()
+                    {
+                        Number = "Счётчик-2",
+                        CheckDate = new DateTime(2022, 01, 01),
+                        Type = "Тип-2",
+                        MeterPointId = 2
+                    });
+            }
+
+            if (!context.CurrentTransformers.Any())
+            {
+                context.CurrentTransformers.AddRange(
+                    new CurrentTransformer()
+                    {
+                        Number = "Трансформатор тока-1",
+                        CheckDate = new DateTime(2018, 02, 02),
+                        KTT = 1.73,
+                        MeterPointId = 1
+                    },
+                    new CurrentTransformer()
+                    {
+                        Number = "Трансформатор тока-2",
+                        CheckDate = new DateTime(2022, 02, 02),
+                        KTT = 1.41,
+                        MeterPointId = 2
+                    });
+            }
+
+            if (!context.VoltageTransformers.Any())
+            {
+                context.VoltageTransformers.AddRange(
+                    new VoltageTransformer()
+                    {
+                        Number = "Трансформатор тока-1",
+                        CheckDate = new DateTime(2018, 03, 03),
+                        KTH = 1.73,
+                        MeterPointId = 1
+                    },
+                    new VoltageTransformer()
+                    {
+                        Number = "Трансформатор тока-2",
+                        CheckDate = new DateTime(2022, 03, 03),
+                        KTH = 1.41,
+                        MeterPointId = 2
+                    });
+            }
+
+            if (!context.CalcMeters.Any())
+            {
+                context.CalcMeters.AddRange(
+                    new CalcMeter()
+                    {
+                        Number = "1-2018",
+                        StartDate = new DateTime(2018, 05, 18),
+                        EndDate = new DateTime(2018, 11, 13)
+                    },
+                    new CalcMeter()
+                    {
+                        Number = "2-2020",
+                        StartDate = new DateTime(2020, 01, 01),
+                        EndDate = new DateTime(2020, 12, 31)
+                    },
+                    new CalcMeter()
+                    {
+                        Number = "3-2018",
+                        StartDate = new DateTime(2018, 12, 14),
+                        EndDate = new DateTime(2019, 06, 05)
+                    });
             }
 
             context.SaveChanges();

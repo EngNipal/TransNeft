@@ -63,10 +63,10 @@ namespace TransNeftTest.Services
         }
 
         // 33333333333333
-        public async Task<List<ElectricityMeterViewModel>> GetEMExpiredByConsumer(ConsumerDTO consumerDto)
+        public async Task<List<ElectricityMeterViewModel>> GetEMExpiredByEObject(EObjectDTO eObjectDto)
         {
             var emList = await _electricityMeterRepo.GetListAsync();
-            var emsExpired = emList.Where(em => em.MeterPoint.EObject.Id == consumerDto.Id)
+            var emsExpired = emList.Where(em => em.MeterPoint.EObject.Id == eObjectDto.Id)
                                    .Where(em => em.CheckDate < DateTime.Now)
                                    .ToList();
 
@@ -74,10 +74,10 @@ namespace TransNeftTest.Services
         }
 
         // 44444444444444
-        public async Task<List<CurrentTransformerViewModel>> GetCTExpiredByConsumer(ConsumerDTO consumerDto)
+        public async Task<List<CurrentTransformerViewModel>> GetCTExpiredByEObject(EObjectDTO eObjectDto)
         {
             var ctList = await _currentTransformerRepo.GetListAsync();
-            var currentTransformers = ctList.Where(ct => ct.MeterPoint.EObject.Id == consumerDto.Id)
+            var currentTransformers = ctList.Where(ct => ct.MeterPoint.EObject.Id == eObjectDto.Id)
                                             .Where(ct => ct.CheckDate < DateTime.Now)
                                             .ToList();
 
@@ -85,10 +85,10 @@ namespace TransNeftTest.Services
         }
 
         // 55555555555555555
-        public async Task<List<VoltageTransformerViewModel>> GetVTExpiredByConsumer(ConsumerDTO consumerDto)
+        public async Task<List<VoltageTransformerViewModel>> GetVTExpiredByEObject(EObjectDTO eObjectDto)
         {
             var vtList = await _voltageTransformerRepo.GetListAsync();
-            var voltageTransformers = vtList.Where(vt => vt.MeterPoint.EObject.Id == consumerDto.Id)
+            var voltageTransformers = vtList.Where(vt => vt.MeterPoint.EObject.Id == eObjectDto.Id)
                                             .Where(vt => vt.CheckDate < DateTime.Now)
                                             .ToList();
 

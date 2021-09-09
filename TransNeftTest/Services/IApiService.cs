@@ -17,8 +17,8 @@ namespace TransNeftTest.Services
 
         public Task CreateMeterPoint(MeterPointDTO meterPointDto);
         public Task<List<CalcMeterViewModel>> GetCalcMetersByYear(int year);
-        public Task<List<ElectricityMeterViewModel>> GetEMExpiredByConsumer(ConsumerDTO consumerDto);
-        public Task<List<CurrentTransformerViewModel>> GetCTExpiredByConsumer(ConsumerDTO consumerDto);
-        public Task<List<VoltageTransformerViewModel>> GetVTExpiredByConsumer(ConsumerDTO consumerDto);
+        public Task<List<ElectricityMeterViewModel>> GetEMExpiredByEObject(EObjectDTO eObjectDto);
+        public Task<List<CurrentTransformerViewModel>> GetCTExpiredByEObject(EObjectDTO eObjectDto);
+        public Task<List<VoltageTransformerViewModel>> GetVTExpiredByEObject(EObjectDTO eObjectDto);
     }
 }

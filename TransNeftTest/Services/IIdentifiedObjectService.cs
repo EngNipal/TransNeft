@@ -7,8 +7,8 @@ using TransNeftTest.ViewModels;
 
 namespace TransNeftTest.Services
 {
-    public interface ISubsidiaryService : IService<SubsidiaryViewModel>
+    public interface IIdentifiedObjectService : IService<IdentifiedObjectViewModel>
     {
-        public Task UpdateAsync(SubsidiaryDTO subsidiaryDTO);
+        public Task UpdateAsync(IdentifiedObjectDTO identifiedObjectDto);
     }
 }
