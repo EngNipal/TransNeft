@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
 
@@ -23,29 +24,17 @@ namespace TransNeftTest.Repositories
         }
 
         public async Task<MeterPoint> GetAsync(int meterPointId) => await _db.MeterPoints
-            .Include(mp => mp.ElectricityMeter)
-            .Include(mp => mp.CurrentTransformer)
-            .Include(mp => mp.VoltageTransformer)
-            .Include(mp => mp.EObject)
-            .Include(mp => mp.CalcMeter)
             .FirstOrDefaultAsync(mp => mp.Id == meterPointId);
 
-        public async Task<IList<MeterPoint>> GetListAsync() => await _db.MeterPoints
-            .Include(mp => mp.ElectricityMeter)
-            .Include(mp => mp.CurrentTransformer)
-            .Include(mp => mp.VoltageTransformer)
-            .Include(mp => mp.EObject)
-            .Include(mp => mp.CalcMeter)
+        public async Task<IQueryable<MeterPoint>> GetListAsync() => (IQueryable<MeterPoint>)await _db.MeterPoints
             .ToListAsync();
-
-        public async Task SaveAsync() => await _db.SaveChangesAsync();
 
         public async Task UpdateAsync(MeterPoint item)
         {
             var meterPointDb = await _db.MeterPoints.FindAsync(item.Id);
             if (meterPointDb == null)
             {
-                throw new Exception(_messageMeterPointAbsent);
+                throw new KeyNotFoundException(_messageMeterPointAbsent);
             }
 
             meterPointDb.Name = item.Name;

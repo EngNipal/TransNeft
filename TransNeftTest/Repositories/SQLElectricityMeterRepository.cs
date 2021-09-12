@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
 
@@ -26,18 +27,16 @@ namespace TransNeftTest.Repositories
             .Include(em => em.MeterPoint)
             .FirstOrDefaultAsync(em => em.Id == id);
 
-        public async Task<IList<ElectricityMeter>> GetListAsync() => await _db.ElectricityMeters
+        public async Task<IQueryable<ElectricityMeter>> GetListAsync() => (IQueryable<ElectricityMeter>)await _db.ElectricityMeters
             .Include(em => em.MeterPoint)
             .ToListAsync();
-
-        public Task SaveAsync() => _db.SaveChangesAsync();
 
         public async Task UpdateAsync(ElectricityMeter item)
         {
             var electricityMeterDb = await _db.ElectricityMeters.FindAsync(item.Id);
             if (electricityMeterDb == null)
             {
-                throw new Exception(_messageElectricityMeterAbsent);
+                throw new KeyNotFoundException(_messageElectricityMeterAbsent);
             }
 
             electricityMeterDb.Number = item.Number;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TransNeftTest.Repositories
@@ -7,8 +8,7 @@ namespace TransNeftTest.Repositories
     {
         Task AddAsync(T entity);
         Task<T> GetAsync(int id);
-        Task<IList<T>> GetListAsync();
+        Task<IEnumerable<T>> GetListAsync();
         Task UpdateAsync(T entity);
-        Task SaveAsync();
     }
 }

@@ -9,13 +9,13 @@ namespace TransNeftTest
     {
         public static void AddServiceProfile(this IServiceCollection services)
         {
-            services.AddScoped<IApiService, ApiService>();
+            services.AddScoped<IWebService, WebService>();
             
-            services.AddScoped<IRepository<CalcMeter>, SQLCalcMeterRepository>();
-            services.AddScoped<IRepository<CurrentTransformer>, SQLCurrentTransformerRepository>();
-            services.AddScoped<IRepository<ElectricityMeter>, SQLElectricityMeterRepository>();
-            services.AddScoped<IRepository<MeterPoint>, SQLMeterPointRepository>();
-            services.AddScoped<IRepository<VoltageTransformer>, SQLVoltageTransformerRepository>();
+            services.AddTransient<IRepository<CalcMeter>, SQLCalcMeterRepository>();
+            services.AddTransient<IRepository<CurrentTransformer>, SQLCurrentTransformerRepository>();
+            services.AddTransient<IRepository<ElectricityMeter>, SQLElectricityMeterRepository>();
+            services.AddTransient<IRepository<MeterPoint>, SQLMeterPointRepository>();
+            services.AddTransient<IRepository<VoltageTransformer>, SQLVoltageTransformerRepository>();
         }
     }
 }

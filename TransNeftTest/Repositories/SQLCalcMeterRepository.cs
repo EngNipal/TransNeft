@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
+using System.Linq;
 
 namespace TransNeftTest.Repositories
 {
@@ -24,23 +25,17 @@ namespace TransNeftTest.Repositories
         }
 
         public async Task<CalcMeter> GetAsync(int calcMeterid) => await _db.CalcMeters
-            .Include(cm => cm.DeliveryPoint)
-            .Include(cm => cm.MeterPoint)
             .FirstOrDefaultAsync(cm => cm.Id == calcMeterid);
 
-        public async Task<IList<CalcMeter>> GetListAsync() => await _db.CalcMeters
-            .Include(cm => cm.DeliveryPoint)
-            .Include(cm => cm.MeterPoint)
+        public async Task<IQueryable<CalcMeter>> GetListAsync() => (IQueryable<CalcMeter>)await _db.CalcMeters
             .ToListAsync();
-
-        public async Task SaveAsync() => await _db.SaveChangesAsync();
 
         public async Task UpdateAsync(CalcMeter item)
         {
             var calcMeterDb = await _db.CalcMeters.FindAsync(item.Id);
             if (calcMeterDb == null)
             {
-                throw new Exception(_messageCalcMeterAbsent);
+                throw new KeyNotFoundException(_messageCalcMeterAbsent);
             }
 
             calcMeterDb.Number = item.Number;

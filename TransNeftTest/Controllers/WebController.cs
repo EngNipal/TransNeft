@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TransNeftTest.DTOModels;
@@ -13,14 +14,14 @@ namespace TransNeftTest.Controllers
     [ApiController]
     public class WebController : Controller
     {
-        private IApiService _apiService { get; set; }
-        public WebController(IApiService apiService) => _apiService = apiService;
-        private int _minYear = 1900;
+        private IWebService _apiService { get; set; }
+        public WebController(IWebService apiService) => _apiService = apiService;
+        private const int _minYear = 1900;
 
         // GET api/<Controller>/<action>
         [HttpGet]
         [Route("[action]")]
-        public async Task<ActionResult<List<CurrentTransformerViewModel>>> GetFreeCurrentTransformers()
+        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> FreeCurrentTransformers()
         {
             return await _apiService.GetFreeCurrentTransformers();
         }
@@ -28,7 +29,7 @@ namespace TransNeftTest.Controllers
         // GET api/<Controller>/<action>
         [HttpGet]
         [Route("[action]")]
-        public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetFreeElectricityMeters()
+        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> FreeElectricityMeters()
         {
             return await _apiService.GetFreeElectricityMeters();
         }
@@ -36,15 +37,16 @@ namespace TransNeftTest.Controllers
         // GET api/<Controller>/<action>
         [HttpGet]
         [Route("[action]")]
-        public async Task<ActionResult<List<VoltageTransformerViewModel>>> GetFreeVoltageTransformers()
+        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> FreeVoltageTransformers()
         {
             return await _apiService.GetFreeVoltageTransformers();
         }
 
         // POST api/<Controller>/meterPointDTO
         [HttpPost("{meterPointDTO}")]
-        public async Task<IActionResult> CreateMeterPoint(MeterPointDTO meterPointDTO)
+        public async Task<IActionResult> CreateMeterPoint([FromBody]MeterPointDTO meterPointDTO)
         {
+
             var validator = new MeterPointValidator();
             var validRes = validator.Validate(meterPointDTO);
             if (!validRes.IsValid)
@@ -56,9 +58,9 @@ namespace TransNeftTest.Controllers
             {
                 await _apiService.CreateMeterPoint(meterPointDTO);
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500);
+                return StatusCode(500, ex);
             }
 
             return Ok(meterPointDTO);
@@ -66,7 +68,7 @@ namespace TransNeftTest.Controllers
 
         // GET api/<Controller>/2018
         [HttpGet("{year}")]
-        public async Task<ActionResult<List<CalcMeterViewModel>>> GetCalcMetersByYear(int year)
+        public async Task<ActionResult<IEnumerable<CalcMeterViewModel>>> CalcMeters(int year)
         {
             if (year < _minYear)
             {
@@ -78,7 +80,7 @@ namespace TransNeftTest.Controllers
 
         // GET api/<Controller>/<action>/eObjectDto
         [HttpGet("[action]/{eObjectDto}")]
-        public async Task<ActionResult<List<ElectricityMeterViewModel>>> GetEMExpiredByEObject(EObjectDTO eObjectDto)
+        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> EMExpired([FromBody]EObjectDTO eObjectDto)
         {
             var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)
@@ -91,7 +93,7 @@ namespace TransNeftTest.Controllers
 
         // GET api/<Controller>/<action>/eObjectDto
         [HttpGet("[action]/{eObjectDto}")]
-        public async Task<ActionResult<List<CurrentTransformerViewModel>>> GetCTExpiredByEObject(EObjectDTO eObjectDto)
+        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> CTExpired(EObjectDTO eObjectDto)
         {
             var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)
@@ -104,7 +106,7 @@ namespace TransNeftTest.Controllers
 
         // GET api/<Controller>/<action>/eObjectDto
         [HttpGet("[action]/{eObjectDto}")]
-        public async Task<ActionResult<List<VoltageTransformerViewModel>>> GetVTExpiredByEObject(EObjectDTO eObjectDto)
+        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> VTExpired(EObjectDTO eObjectDto)
         {
             var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)

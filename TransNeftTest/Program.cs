@@ -14,6 +14,10 @@ namespace TransNeftTest
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    //webBuilder.ConfigureKestrel(serverOptions =>
+                    //{
+                    //    serverOptions.ListenLocalhost(8050);
+                    //})
                     webBuilder.UseStartup<Startup>();
                 });
     }

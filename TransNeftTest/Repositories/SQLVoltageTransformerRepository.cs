@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
 
@@ -9,6 +10,8 @@ namespace TransNeftTest.Repositories
     public class SQLVoltageTransformerRepository : IRepository<VoltageTransformer>
     {
         private TNEContext _db;
+        private const string _messageVoltageTransformerAbsent = "Запрошенного трансформатора напряжения не найдено!";
+
         public SQLVoltageTransformerRepository(TNEContext context)
         {
             _db = context;
@@ -24,19 +27,17 @@ namespace TransNeftTest.Repositories
             .Include(vt => vt.MeterPoint)
             .FirstOrDefaultAsync(vt => vt.Id == id);
 
-        public async Task<IList<VoltageTransformer>> GetListAsync() => await _db.VoltageTransformers
+        public async Task<IQueryable<VoltageTransformer>> GetListAsync() => (IQueryable<VoltageTransformer>)await _db.VoltageTransformers
             .Include(vt => vt.MeterPoint)
             .ToListAsync();
-
-        public Task SaveAsync() => _db.SaveChangesAsync();
 
         public async Task UpdateAsync(VoltageTransformer item)
         {
             var voltageTransformerDb = await _db.VoltageTransformers.FindAsync(item.Id);
             if (voltageTransformerDb == null)
             {
-                throw new NotImplementedException();
-}
+                throw new KeyNotFoundException(_messageVoltageTransformerAbsent);
+            }
 
             voltageTransformerDb.Number = item.Number;
             voltageTransformerDb.CheckDate = item.CheckDate;

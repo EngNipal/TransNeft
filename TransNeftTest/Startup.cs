@@ -30,7 +30,7 @@ namespace TransNeftTest
             services.AddServiceProfile();
             services.AddDbContext<TNEContext>(options => options.UseSqlServer(connection));
 
-            services.AddControllersWithViews();
+            services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {
@@ -58,7 +58,6 @@ namespace TransNeftTest
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TransNeftTest v1");
-                    //c.RoutePrefix = string.Empty;
                 });
             }
 
