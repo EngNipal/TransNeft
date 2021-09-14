@@ -24,6 +24,8 @@ namespace TransNeftTest
                     });
             }
 
+            context.SaveChanges();
+
             if (!context.EObjects.Any())
             {
                 context.EObjects.AddRange(
@@ -35,11 +37,13 @@ namespace TransNeftTest
                     },
                     new EObject()
                     {
-                        Name = "Потребитель-1",
-                        Address = "Адрес потребителя-1",
+                        Name = "Потребитель-2",
+                        Address = "Адрес потребителя-2",
                         ParentOrganizationId = 2
                     });
             }
+
+            context.SaveChanges();
 
             if (!context.MeterPoints.Any())
             {
@@ -55,6 +59,58 @@ namespace TransNeftTest
                         EObjectId = 2
                     });
             }
+
+            context.SaveChanges();
+
+            if (!context.DeliveryPoints.Any())
+            {
+                context.DeliveryPoints.AddRange(
+                    new DeliveryPoint()
+                    {
+                        Name = "Точка поставки-1",
+                        EObjectId = 1
+                    },
+                    new DeliveryPoint()
+                    {
+                        Name = "Точка поставки-2",
+                        EObjectId = 2
+                    },
+                    new DeliveryPoint()
+                    {
+                        Name = "Точка поставки-3",
+                        EObjectId = 2
+                    });
+            }
+
+            context.SaveChanges();
+
+            if (!context.CalcMeters.Any())
+            {
+                context.CalcMeters.AddRange(
+                    new CalcMeter()
+                    {
+                        Number = "1-2018",
+                        StartDate = new DateTime(2018, 05, 18),
+                        EndDate = new DateTime(2018, 11, 13),
+                        DeliveryPointId = 1
+                    },
+                    new CalcMeter()
+                    {
+                        Number = "2-2020",
+                        StartDate = new DateTime(2020, 01, 01),
+                        EndDate = new DateTime(2020, 12, 31),
+                        DeliveryPointId = 2
+                    },
+                    new CalcMeter()
+                    {
+                        Number = "3-2018",
+                        StartDate = new DateTime(2018, 06, 05),
+                        EndDate = new DateTime(2018, 12, 13),
+                        DeliveryPointId = 3
+                    });
+            }
+
+            context.SaveChanges();
 
             if (!context.ElectricityMeters.Any())
             {
@@ -81,6 +137,8 @@ namespace TransNeftTest
                     });
             }
 
+            context.SaveChanges();
+
             if (!context.CurrentTransformers.Any())
             {
                 context.CurrentTransformers.AddRange(
@@ -106,6 +164,8 @@ namespace TransNeftTest
                     });
             }
 
+            context.SaveChanges();
+
             if (!context.VoltageTransformers.Any())
             {
                 context.VoltageTransformers.AddRange(
@@ -129,29 +189,6 @@ namespace TransNeftTest
                         CheckDate = new DateTime(2023, 03, 03),
                         KTH = 3.14,
                         MeterPointId = 2
-                    });
-            }
-
-            if (!context.CalcMeters.Any())
-            {
-                context.CalcMeters.AddRange(
-                    new CalcMeter()
-                    {
-                        Number = "1-2018",
-                        StartDate = new DateTime(2018, 05, 18),
-                        EndDate = new DateTime(2018, 11, 13)
-                    },
-                    new CalcMeter()
-                    {
-                        Number = "2-2020",
-                        StartDate = new DateTime(2020, 01, 01),
-                        EndDate = new DateTime(2020, 12, 31)
-                    },
-                    new CalcMeter()
-                    {
-                        Number = "3-2018",
-                        StartDate = new DateTime(2018, 06, 05),
-                        EndDate = new DateTime(2018, 12, 13)
                     });
             }
 

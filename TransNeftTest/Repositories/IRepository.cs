@@ -4,11 +4,10 @@ using System.Threading.Tasks;
 
 namespace TransNeftTest.Repositories
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> : IOrderedQueryable<T> where T : class
     {
         Task AddAsync(T entity);
-        Task<T> GetAsync(int id);
-        Task<IEnumerable<T>> GetListAsync();
         Task UpdateAsync(T entity);
+        Task<IEnumerable<T>> GetListAsync();
     }
 }

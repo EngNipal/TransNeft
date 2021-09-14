@@ -13,5 +13,6 @@ namespace TransNeftTest.ViewModels
         public int MeterPointId { get; set; }
         /// <summary> Точка измерения электроэнергии </summary>
         public string MeterPointName { get; set; }
+        public override string ToString() => Number;
     }
 }

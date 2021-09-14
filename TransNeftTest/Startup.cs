@@ -23,12 +23,11 @@ namespace TransNeftTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<OrganizationValidator>());
-
             string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<TNEContext>(options => options.UseSqlServer(connection));
 
             services.AddServiceProfile();
-            services.AddDbContext<TNEContext>(options => options.UseSqlServer(connection));
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<OrganizationValidator>());
 
             services.AddControllers();
 

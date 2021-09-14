@@ -13,7 +13,7 @@ namespace TransNeftTest.Models
         /// <summary> Дата окончания работы. </summary>
         public DateTime EndDate { get; set; }
         /// <summary> Id точки поставки электроэнергии. </summary>
-        public int DeliveryPointId {  get; set; }
+        public int DeliveryPointId { get; set; }
         /// <summary> Точка поставки электроэнергии. </summary>
         public DeliveryPoint DeliveryPoint { get; set; }
         /// <summary> Id точки измерения электроэнергии. </summary>

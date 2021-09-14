@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,16 +50,15 @@ namespace TransNeftTest.Services
 
         public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetFreeCurrentTransformers()
         {
-            var cTranses = (await _currentTransformerRepo.GetListAsync())
-                .Where(ct => ct.MeterPoint == null);
+            var cTranses = await _currentTransformerRepo.Where(ct => ct.MeterPoint == null).ToListAsync();
 
             return _mapper.Map<IEnumerable<CurrentTransformer>, List<CurrentTransformerViewModel>>(cTranses);
         }
 
         public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetFreeVoltageTransformers()
         {
-            var vTranses = (await _voltageTransformerRepo.GetListAsync())
-                .Where(vt => vt.MeterPoint == null);
+            var vTranses = (await _voltageTransformerRepo.GetListAsync());
+                //.Where(vt => vt.MeterPoint == null);
 
             return _mapper.Map<IEnumerable<VoltageTransformer>, List<VoltageTransformerViewModel>>(vTranses);
         }
