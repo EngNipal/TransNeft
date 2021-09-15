@@ -21,6 +21,7 @@ namespace TransNeftTest
 
         public TNEContext(DbContextOptions<TNEContext> options) : base(options)
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -75,14 +76,9 @@ namespace TransNeftTest
 
             modelBuilder.Entity<CalcMeter>()
                 .HasOne(cm => cm.DeliveryPoint)
-                .WithOne(dp => dp.CalcMeter)
-                .HasForeignKey<CalcMeter>(cm => cm.DeliveryPointId)
+                .WithMany(dp => dp.CalcMeters)
+                .HasForeignKey(cm => cm.DeliveryPointId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<CalcMeter>()
-                .HasOne(cm => cm.MeterPoint)
-                .WithOne(mp => mp.CalcMeter)
-                .HasForeignKey<CalcMeter>(cm => cm.MeterPointId);
         }
     }
 }
