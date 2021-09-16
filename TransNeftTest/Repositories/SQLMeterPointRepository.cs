@@ -7,13 +7,33 @@ using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLMeterPointRepository : RepositoryBase<MeterPoint>, IRepository<MeterPoint>
+    public class SQLMeterPointRepository : IRepository<MeterPoint>
     {
-        public SQLMeterPointRepository(TNEContext context) : base(context)
-        { }
+        private readonly TNEContext _db;
+        private readonly DbSet<MeterPoint> _dbSet;
 
-        public async Task<MeterPoint> GetAsync(int meterPointId) =>
-            await dbContext.MeterPoints
+        public SQLMeterPointRepository(TNEContext context)
+        {
+            _db = context;
+            _dbSet = _db.Set<MeterPoint>();
+        }
+
+        public async Task AddAsync(MeterPoint entity)
+        {
+            await _db.MeterPoints.AddAsync(entity);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(MeterPoint entity)
+        {
+            _db.MeterPoints.Update(entity);
+
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<MeterPoint> GetAsync(int meterPointId) => await _db.MeterPoints
             .FirstOrDefaultAsync(mp => mp.Id == meterPointId);
+
+        public IQueryable<MeterPoint> GetList() => _dbSet;
     }
 }

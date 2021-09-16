@@ -7,14 +7,36 @@ using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLVoltageTransformerRepository : RepositoryBase<VoltageTransformer>, IRepository<VoltageTransformer>
+    public class SQLVoltageTransformerRepository : IRepository<VoltageTransformer>
     {
-        public SQLVoltageTransformerRepository(TNEContext context) : base(context)
-        { }
+        private readonly TNEContext _db;
+        private readonly DbSet<VoltageTransformer> _dbSet;
 
-        public async Task<VoltageTransformer> GetAsync(int id) =>
-            await dbContext.VoltageTransformers
+        public SQLVoltageTransformerRepository(TNEContext context)
+        {
+            _db = context;
+            _dbSet = _db.Set<VoltageTransformer>();
+        }
+
+        public async Task AddAsync(VoltageTransformer entity)
+        {
+            await _db.AddAsync(entity);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(VoltageTransformer entity)
+        {
+            _db.VoltageTransformers.Update(entity);
+
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<VoltageTransformer> GetAsync(int id) => await _db.VoltageTransformers
             .Include(vt => vt.MeterPoint)
             .FirstOrDefaultAsync(vt => vt.Id == id);
+
+        public IQueryable<VoltageTransformer> GetList() => 
+            _dbSet
+            .Include(vt => vt.MeterPoint);
     }
 }

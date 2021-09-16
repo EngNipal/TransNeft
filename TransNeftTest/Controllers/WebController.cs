@@ -18,32 +18,32 @@ namespace TransNeftTest.Controllers
         public WebController(IWebService apiService) => _apiService = apiService;
         private const int _minYear = 1900;
 
-        // GET api/<Controller>/<action>
+        // GET api/<Controller>/CurrentTransformers/Free
         [HttpGet]
-        [Route("[action]")]
-        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> FreeCurrentTransformers()
+        [Route("CurrentTransformers/Free")]
+        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetFreeCurrentTransformers()
         {
             return await _apiService.GetFreeCurrentTransformers();
         }
 
-        // GET api/<Controller>/<action>
+        // GET api/<Controller>/ElectricityMeters/Free
         [HttpGet]
-        [Route("[action]")]
-        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> FreeElectricityMeters()
+        [Route("ElectricityMeters/Free")]
+        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetFreeElectricityMeters()
         {
             return await _apiService.GetFreeElectricityMeters();
         }
 
-        // GET api/<Controller>/<action>
+        // GET api/<Controller>/VoltageTransformers/Free
         [HttpGet]
-        [Route("[action]")]
-        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> FreeVoltageTransformers()
+        [Route("VoltageTransformers/Free")]
+        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetFreeVoltageTransformers()
         {
             return await _apiService.GetFreeVoltageTransformers();
         }
 
-        // POST api/<Controller>/meterPointDTO
-        [HttpPost("{meterPointDTO}")]
+        // POST api/<Controller>/MeterPoint
+        [HttpPost("MeterPoint")]
         public async Task<IActionResult> CreateMeterPoint([FromBody]MeterPointDTO meterPointDTO)
         {
 
@@ -66,9 +66,9 @@ namespace TransNeftTest.Controllers
             return Ok(meterPointDTO);
         }
 
-        // GET api/<Controller>/2018
-        [HttpGet("{year}")]
-        public async Task<ActionResult<IEnumerable<CalcMeterViewModel>>> CalcMeters(int year)
+        // GET api/<Controller>/CalcMeters/2018
+        [HttpGet("CalcMeters/{year}")]
+        public async Task<ActionResult<IEnumerable<CalcMeterViewModel>>> GetCalcMetersByYear(int year)
         {
             if (year < _minYear)
             {
@@ -78,9 +78,9 @@ namespace TransNeftTest.Controllers
             return await _apiService.GetCalcMetersByYear(year);
         }
 
-        // GET api/<Controller>/<action>/eObjectDto
-        [HttpGet("[action]/{eObjectDto}")]
-        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> EMExpired([FromBody]EObjectDTO eObjectDto)
+        // GET api/<Controller>/ElectricityMeters/Expired
+        [HttpGet("ElectricityMeters/Expired")]
+        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetElectricityMetersExpired([FromBody] EObjectDTO eObjectDto)
         {
             var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)
@@ -91,9 +91,9 @@ namespace TransNeftTest.Controllers
             return await _apiService.GetEMExpiredByEObject(eObjectDto);
         }
 
-        // GET api/<Controller>/<action>/eObjectDto
-        [HttpGet("[action]/{eObjectDto}")]
-        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> CTExpired(EObjectDTO eObjectDto)
+        // GET api/<Controller>/CurrentTransformers/Expired
+        [HttpGet("CurrentTransformers/Expired")]
+        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> CTExpired([FromBody] EObjectDTO eObjectDto)
         {
             var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)
@@ -104,9 +104,9 @@ namespace TransNeftTest.Controllers
             return await _apiService.GetCTExpiredByEObject(eObjectDto);
         }
 
-        // GET api/<Controller>/<action>/eObjectDto
-        [HttpGet("[action]/{eObjectDto}")]
-        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> VTExpired(EObjectDTO eObjectDto)
+        // GET api/<Controller>/VoltageTransformers/Expired
+        [HttpGet("VoltageTransformers/Expired")]
+        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> VTExpired([FromBody] EObjectDTO eObjectDto)
         {
             var validRes = ValidateEObject(eObjectDto);
             if (!validRes.IsValid)

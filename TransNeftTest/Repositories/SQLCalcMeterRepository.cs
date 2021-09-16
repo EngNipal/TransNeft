@@ -8,13 +8,34 @@ using System.Linq;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLCalcMeterRepository : RepositoryBase<CalcMeter>
+    public class SQLCalcMeterRepository : IRepository<CalcMeter>
     {
-        public SQLCalcMeterRepository(TNEContext context) : base(context)
-        { }
+        private readonly TNEContext _db;
+        private readonly DbSet<CalcMeter> _dbSet;
+
+        public SQLCalcMeterRepository(TNEContext context)
+        {
+            _db = context;
+            _dbSet = _db.Set<CalcMeter>();
+        }
+
+        public async Task AddAsync(CalcMeter entity)
+        {
+            await _db.CalcMeters.AddAsync(entity);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(CalcMeter entity)
+        {
+            _db.CalcMeters.Update(entity);
+
+            await _db.SaveChangesAsync();
+        }
 
         public async Task<CalcMeter> GetAsync(int id) =>
-            await dbContext.CalcMeters
+            await _db.CalcMeters
             .FirstOrDefaultAsync(cm => cm.Id == id);
+
+        public IQueryable<CalcMeter> GetList() => _dbSet;
     }
 }

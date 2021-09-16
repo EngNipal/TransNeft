@@ -42,23 +42,21 @@ namespace TransNeftTest.Services
 
         public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetFreeElectricityMeters()
         {
-            var elMeters = (await _electricityMeterRepo.GetListAsync())
-                .Where(em => em.MeterPoint == null);
+            var elMeters = await _electricityMeterRepo.GetList().Where(em => em.MeterPoint == null).ToListAsync();
 
             return _mapper.Map<IEnumerable<ElectricityMeter>, List<ElectricityMeterViewModel>>(elMeters);
         }
 
         public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetFreeCurrentTransformers()
         {
-            var cTranses = await _currentTransformerRepo.Where(ct => ct.MeterPoint == null).ToListAsync();
+            var cTranses = await _currentTransformerRepo.GetList().Where(ct => ct.MeterPoint == null).ToListAsync();
 
             return _mapper.Map<IEnumerable<CurrentTransformer>, List<CurrentTransformerViewModel>>(cTranses);
         }
 
         public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetFreeVoltageTransformers()
         {
-            var vTranses = (await _voltageTransformerRepo.GetListAsync());
-                //.Where(vt => vt.MeterPoint == null);
+            var vTranses = await _voltageTransformerRepo.GetList().Where(vt => vt.MeterPoint == null).ToListAsync();
 
             return _mapper.Map<IEnumerable<VoltageTransformer>, List<VoltageTransformerViewModel>>(vTranses);
         }
@@ -73,8 +71,9 @@ namespace TransNeftTest.Services
         // Выбор расчётных приборов учёта по году.
         public async Task<ActionResult<IEnumerable<CalcMeterViewModel>>> GetCalcMetersByYear(int year)
         {
-            var calcMeters = (await _calcMeterRepo.GetListAsync())
-                .Where(cm => cm.StartDate.Year == year);
+            var calcMeters = await _calcMeterRepo.GetList()
+                                    .Where(cm => cm.StartDate.Year == year)
+                                    .ToListAsync();
 
             return _mapper.Map<IEnumerable<CalcMeter>, List<CalcMeterViewModel>>(calcMeters);
         }
@@ -82,9 +81,10 @@ namespace TransNeftTest.Services
         // Выбор счётчиков без поверки по объекту потребления.
         public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetEMExpiredByEObject(EObjectDTO eObjectDto)
         {
-            var emsExpired = (await _electricityMeterRepo.GetListAsync())
-                .Where(em => em.MeterPoint.EObjectId == eObjectDto.Id)
-                .Where(em => em.CheckDate < DateTime.Now);
+            var emsExpired = await _electricityMeterRepo.GetList()
+                                    .Where(em => em.MeterPoint.EObjectId == eObjectDto.Id)
+                                    .Where(em => em.CheckDate < DateTime.Now)
+                                    .ToListAsync();
 
             return _mapper.Map<IEnumerable<ElectricityMeter>, List<ElectricityMeterViewModel>>(emsExpired);
         }
@@ -92,9 +92,10 @@ namespace TransNeftTest.Services
         // Выбор трансформаторов тока по объекту потребления.
         public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCTExpiredByEObject(EObjectDTO eObjectDto)
         {
-            var currentTransformers = (await _currentTransformerRepo.GetListAsync())
-                .Where(ct => ct.MeterPoint.EObjectId == eObjectDto.Id)
-                .Where(ct => ct.CheckDate < DateTime.Now);
+            var currentTransformers = await _currentTransformerRepo.GetList()
+                                            .Where(ct => ct.MeterPoint.EObjectId == eObjectDto.Id)
+                                            .Where(ct => ct.CheckDate < DateTime.Now)
+                                            .ToListAsync();
 
             return _mapper.Map<IEnumerable<CurrentTransformer>, List<CurrentTransformerViewModel>>(currentTransformers);
         }
@@ -102,9 +103,10 @@ namespace TransNeftTest.Services
         // Выбор трансформаторов напряжения по объекту потребления.
         public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVTExpiredByEObject(EObjectDTO eObjectDto)
         {
-            var voltageTransformers = (await _voltageTransformerRepo.GetListAsync())
-                .Where(vt => vt.MeterPoint.EObject.Id == eObjectDto.Id)
-                .Where(vt => vt.CheckDate < DateTime.Now);
+            var voltageTransformers = await _voltageTransformerRepo.GetList()
+                                            .Where(vt => vt.MeterPoint.EObject.Id == eObjectDto.Id)
+                                            .Where(vt => vt.CheckDate < DateTime.Now)
+                                            .ToListAsync();
 
             return _mapper.Map<IEnumerable<VoltageTransformer>, List<VoltageTransformerViewModel>>(voltageTransformers);
         }
