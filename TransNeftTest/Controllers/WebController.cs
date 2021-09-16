@@ -46,7 +46,6 @@ namespace TransNeftTest.Controllers
         [HttpPost("MeterPoint")]
         public async Task<IActionResult> CreateMeterPoint([FromBody]MeterPointDTO meterPointDTO)
         {
-
             var validator = new MeterPointValidator();
             var validRes = validator.Validate(meterPointDTO);
             if (!validRes.IsValid)
@@ -78,50 +77,40 @@ namespace TransNeftTest.Controllers
             return await _apiService.GetCalcMetersByYear(year);
         }
 
-        // GET api/<Controller>/ElectricityMeters/Expired
-        [HttpGet("ElectricityMeters/Expired")]
-        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetElectricityMetersExpired([FromBody] EObjectDTO eObjectDto)
+        // GET api/<Controller>/EObjects/{Id}/ElectricityMeters/Expired
+        [HttpGet("EObjects/{Id}/ElectricityMeters/Expired")]
+        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetElectricityMetersExpired(int Id)
         {
-            var validRes = ValidateEObject(eObjectDto);
-            if (!validRes.IsValid)
+            if (!await _apiService.EObjectExists(Id))
             {
-                return BadRequest(validRes.Errors);
+                return BadRequest($"Wrong {nameof(Id)}");
             }
 
-            return await _apiService.GetEMExpiredByEObject(eObjectDto);
+            return await _apiService.GetEMExpiredByEObject(Id);
         }
 
-        // GET api/<Controller>/CurrentTransformers/Expired
-        [HttpGet("CurrentTransformers/Expired")]
-        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> CTExpired([FromBody] EObjectDTO eObjectDto)
+        // GET api/<Controller>/EObjects/{Id}/CurrentTransformers/Expired
+        [HttpGet("EObjects/{Id}/CurrentTransformers/Expired")]
+        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCurrentTransformersExpired(int Id)
         {
-            var validRes = ValidateEObject(eObjectDto);
-            if (!validRes.IsValid)
+            if (!await _apiService.EObjectExists(Id))
             {
-                return BadRequest(validRes.Errors);
+                return BadRequest($"Wrong {nameof(Id)}");
             }
 
-            return await _apiService.GetCTExpiredByEObject(eObjectDto);
+            return await _apiService.GetCTExpiredByEObject(Id);
         }
 
-        // GET api/<Controller>/VoltageTransformers/Expired
-        [HttpGet("VoltageTransformers/Expired")]
-        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> VTExpired([FromBody] EObjectDTO eObjectDto)
+        // GET api/<Controller>/EObjects/{Id}/VoltageTransformers/Expired
+        [HttpGet("EObjects/{Id}/VoltageTransformers/Expired")]
+        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVoltageTransformersExpired(int Id)
         {
-            var validRes = ValidateEObject(eObjectDto);
-            if (!validRes.IsValid)
+            if (!await _apiService.EObjectExists(Id))
             {
-                return BadRequest(validRes.Errors);
+                return BadRequest($"Wrong {nameof(Id)}");
             }
 
-            return await _apiService.GetVTExpiredByEObject(eObjectDto);
-        }
-
-        [NonAction]
-        private ValidationResult ValidateEObject(EObjectDTO eObjectDto)
-        {
-            var validator = new EObjectValidator();
-            return validator.Validate(eObjectDto);
+            return await _apiService.GetVTExpiredByEObject(Id);
         }
     }
 }

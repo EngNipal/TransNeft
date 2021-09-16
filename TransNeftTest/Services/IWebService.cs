@@ -14,8 +14,10 @@ namespace TransNeftTest.Services
 
         public Task CreateMeterPoint(MeterPointDTO meterPointDto);
         public Task<ActionResult<IEnumerable<CalcMeterViewModel>>> GetCalcMetersByYear(int year);
-        public Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetEMExpiredByEObject(EObjectDTO eObjectDto);
-        public Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCTExpiredByEObject(EObjectDTO eObjectDto);
-        public Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVTExpiredByEObject(EObjectDTO eObjectDto);
+
+        public Task<bool> EObjectExists(int eObjectId);
+        public Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetEMExpiredByEObject(int eObjectId);
+        public Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCTExpiredByEObject(int eObjectId);
+        public Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVTExpiredByEObject(int eObjectId);
     }
 }

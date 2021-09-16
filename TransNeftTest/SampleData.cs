@@ -17,15 +17,18 @@ namespace TransNeftTest
             var organization2 = new Organization()
             {
                 Name = "ТранснефтьЭнерго",
-                Address = "123112, Москва, Пресненская наб., д.4, стр.2, башня \"Эволюция\"",
-                ParentOrganizationId = 1
-                //ParentOrganization = organization1,
+                Address = "123112, Москва, Пресненская наб., д.4, стр.2, башня \"Эволюция\""
             };
 
             if (!context.Organizations.Any())
             {
                 context.Organizations.Add(organization1);
                 context.Organizations.Add(organization2);
+                context.SaveChanges();
+
+                organization2.ParentOrganizationId = organization1.Id;
+
+                context.Organizations.Update(organization2);
                 context.SaveChanges();
             }
 
@@ -210,7 +213,7 @@ namespace TransNeftTest
                 context.CurrentTransformers.Add(currTransformer1);
                 context.CurrentTransformers.Add(currTransformer2);
                 context.CurrentTransformers.Add(currTransformer3);
-                context.SaveChanges(); // TODO: Разобраться почему не сохраняет в базе.
+                context.SaveChanges();
 
                 meterPoint1.CurrentTransformerId = currTransformer1.Id;
                 meterPoint2.CurrentTransformerId = currTransformer2.Id;
@@ -253,6 +256,7 @@ namespace TransNeftTest
                 meterPoint1.VoltageTransformerId = voltageTransformer1.Id;
                 meterPoint2.VoltageTransformerId = voltageTransformer2.Id;
 
+                context.MeterPoints.UpdateRange(meterPoint1, meterPoint2);
                 context.SaveChanges();
             }
         }

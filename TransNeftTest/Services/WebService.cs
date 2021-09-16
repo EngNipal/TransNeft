@@ -16,6 +16,7 @@ namespace TransNeftTest.Services
     {
         private IMapper _mapper;
         
+        private readonly IRepository<EObject> _eObjectRepo;
         private readonly IRepository<ElectricityMeter> _electricityMeterRepo;
         private readonly IRepository<CurrentTransformer> _currentTransformerRepo;
         private readonly IRepository<VoltageTransformer> _voltageTransformerRepo;
@@ -25,6 +26,7 @@ namespace TransNeftTest.Services
 
 
         public WebService(
+            IRepository<EObject> eoRepo,
             IRepository<ElectricityMeter> emRepo,
             IRepository<CurrentTransformer> ctRepo,
             IRepository<VoltageTransformer> vtRepo,
@@ -32,6 +34,7 @@ namespace TransNeftTest.Services
             IRepository<CalcMeter> cmRepo,
             IMapper mapper)
         {
+            _eObjectRepo = eoRepo;
             _electricityMeterRepo = emRepo;
             _currentTransformerRepo = ctRepo;
             _voltageTransformerRepo = vtRepo;
@@ -78,11 +81,14 @@ namespace TransNeftTest.Services
             return _mapper.Map<IEnumerable<CalcMeter>, List<CalcMeterViewModel>>(calcMeters);
         }
 
+        // Проверка существования EObject-a с указанным id.
+        public async Task<bool> EObjectExists(int eObjectId) => await _eObjectRepo.GetAsync(eObjectId) != null;
+
         // Выбор счётчиков без поверки по объекту потребления.
-        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetEMExpiredByEObject(EObjectDTO eObjectDto)
+        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetEMExpiredByEObject(int eObjectId)
         {
             var emsExpired = await _electricityMeterRepo.GetList()
-                                    .Where(em => em.MeterPoint.EObjectId == eObjectDto.Id)
+                                    .Where(em => em.MeterPoint.EObjectId == eObjectId)
                                     .Where(em => em.CheckDate < DateTime.Now)
                                     .ToListAsync();
 
@@ -90,10 +96,10 @@ namespace TransNeftTest.Services
         }
 
         // Выбор трансформаторов тока по объекту потребления.
-        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCTExpiredByEObject(EObjectDTO eObjectDto)
+        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCTExpiredByEObject(int eObjectId)
         {
             var currentTransformers = await _currentTransformerRepo.GetList()
-                                            .Where(ct => ct.MeterPoint.EObjectId == eObjectDto.Id)
+                                            .Where(ct => ct.MeterPoint.EObjectId == eObjectId)
                                             .Where(ct => ct.CheckDate < DateTime.Now)
                                             .ToListAsync();
 
@@ -101,10 +107,10 @@ namespace TransNeftTest.Services
         }
 
         // Выбор трансформаторов напряжения по объекту потребления.
-        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVTExpiredByEObject(EObjectDTO eObjectDto)
+        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVTExpiredByEObject(int eObjectId)
         {
             var voltageTransformers = await _voltageTransformerRepo.GetList()
-                                            .Where(vt => vt.MeterPoint.EObject.Id == eObjectDto.Id)
+                                            .Where(vt => vt.MeterPoint.EObject.Id == eObjectId)
                                             .Where(vt => vt.CheckDate < DateTime.Now)
                                             .ToListAsync();
 

@@ -21,7 +21,6 @@ namespace TransNeftTest
 
         public TNEContext(DbContextOptions<TNEContext> options) : base(options)
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

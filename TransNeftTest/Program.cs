@@ -30,13 +30,6 @@ namespace TransNeftTest
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    //webBuilder.ConfigureKestrel(serverOptions =>
-                    //{
-                    //    serverOptions.ListenLocalhost(8050);
-                    //})
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
