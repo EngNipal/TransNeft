@@ -17,20 +17,20 @@ namespace TransNeftTest.Services
         private IMapper _mapper;
         
         private readonly IRepository<EObject> _eObjectRepo;
-        private readonly IRepository<ElectricityMeter> _electricityMeterRepo;
+        private readonly IEMRepository _electricityMeterRepo;
         private readonly IRepository<CurrentTransformer> _currentTransformerRepo;
         private readonly IRepository<VoltageTransformer> _voltageTransformerRepo;
-        private readonly IRepository<MeterPoint> _meterPointRepo;
+        private readonly IRepository<MeterPointDTO> _meterPointRepo;
         private readonly IRepository<CalcMeter> _calcMeterRepo;
 
 
 
         public WebService(
             IRepository<EObject> eoRepo,
-            IRepository<ElectricityMeter> emRepo,
+            IEMRepository emRepo,
             IRepository<CurrentTransformer> ctRepo,
             IRepository<VoltageTransformer> vtRepo,
-            IRepository<MeterPoint> mpRepo,
+            IRepository<MeterPointDTO> mpRepo,
             IRepository<CalcMeter> cmRepo,
             IMapper mapper)
         {
@@ -43,21 +43,17 @@ namespace TransNeftTest.Services
             _mapper = mapper;
         }
 
-        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetFreeElectricityMeters()
-        {
-            var elMeters = await _electricityMeterRepo.GetList().Where(em => em.MeterPoint == null).ToListAsync();
+        public async Task<IEnumerable<ElectricityMeterDTO>> GetFreeElectricityMeters() =>
+            await _electricityMeterRepo.GetFreeAsync();
 
-            return _mapper.Map<IEnumerable<ElectricityMeter>, List<ElectricityMeterViewModel>>(elMeters);
-        }
-
-        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetFreeCurrentTransformers()
+        public async Task<IEnumerable<CurrentTransformerDTO>> GetFreeCurrentTransformers()
         {
             var cTranses = await _currentTransformerRepo.GetList().Where(ct => ct.MeterPoint == null).ToListAsync();
 
             return _mapper.Map<IEnumerable<CurrentTransformer>, List<CurrentTransformerViewModel>>(cTranses);
         }
 
-        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetFreeVoltageTransformers()
+        public async Task<IEnumerable<VoltageTransformerDTO>> GetFreeVoltageTransformers()
         {
             var vTranses = await _voltageTransformerRepo.GetList().Where(vt => vt.MeterPoint == null).ToListAsync();
 
@@ -67,12 +63,11 @@ namespace TransNeftTest.Services
         // Создание новой точки измерения.
         public async Task CreateMeterPoint(MeterPointDTO meterPointDto)
         {
-            var meterPoint = _mapper.Map<MeterPointDTO, MeterPoint>(meterPointDto);
-            await _meterPointRepo.AddAsync(meterPoint);
+            await _meterPointRepo.AddAsync(meterPointDto);
         }
 
         // Выбор расчётных приборов учёта по году.
-        public async Task<ActionResult<IEnumerable<CalcMeterViewModel>>> GetCalcMetersByYear(int year)
+        public async Task<IEnumerable<CalcMeterDTO>> GetCalcMetersByYear(int year)
         {
             var calcMeters = await _calcMeterRepo.GetList()
                                     .Where(cm => cm.StartDate.Year == year)
@@ -85,7 +80,7 @@ namespace TransNeftTest.Services
         public async Task<bool> EObjectExists(int eObjectId) => await _eObjectRepo.GetAsync(eObjectId) != null;
 
         // Выбор счётчиков без поверки по объекту потребления.
-        public async Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetEMExpiredByEObject(int eObjectId)
+        public async Task<IEnumerable<ElectricityMeterDTO>> GetEMExpiredByEObject(int eObjectId)
         {
             var emsExpired = await _electricityMeterRepo.GetList()
                                     .Where(em => em.MeterPoint.EObjectId == eObjectId)
@@ -96,7 +91,7 @@ namespace TransNeftTest.Services
         }
 
         // Выбор трансформаторов тока по объекту потребления.
-        public async Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCTExpiredByEObject(int eObjectId)
+        public async Task<IEnumerable<CurrentTransformerDTO>> GetCTExpiredByEObject(int eObjectId)
         {
             var currentTransformers = await _currentTransformerRepo.GetList()
                                             .Where(ct => ct.MeterPoint.EObjectId == eObjectId)
@@ -107,7 +102,7 @@ namespace TransNeftTest.Services
         }
 
         // Выбор трансформаторов напряжения по объекту потребления.
-        public async Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVTExpiredByEObject(int eObjectId)
+        public async Task<IEnumerable<VoltageTransformerDTO>> GetVTExpiredByEObject(int eObjectId)
         {
             var voltageTransformers = await _voltageTransformerRepo.GetList()
                                             .Where(vt => vt.MeterPoint.EObject.Id == eObjectId)

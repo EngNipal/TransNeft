@@ -30,8 +30,7 @@ namespace TransNeftTest
             CreateMap<DeviceDTO, Device>();
 
             // ElectricityMeter
-            CreateMap<ElectricityMeter, ElectricityMeterViewModel>();
-            CreateMap<ElectricityMeterViewModel, ElectricityMeter>();
+            CreateMap<ElectricityMeter, ElectricityMeterDTO>();
             CreateMap<ElectricityMeterDTO, ElectricityMeter>();
 
             // EObject
@@ -45,8 +44,7 @@ namespace TransNeftTest
             CreateMap<IdentifiedObjectDTO, IdentifiedObject>();
 
             // MeterPoint
-            CreateMap<MeterPoint, MeterPointViewModel>();
-            CreateMap<MeterPointViewModel, MeterPoint>();
+            CreateMap<MeterPoint, MeterPointDTO>();
             CreateMap<MeterPointDTO, MeterPoint>();
 
             // Organization

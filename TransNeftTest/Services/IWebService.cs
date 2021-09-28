@@ -8,16 +8,16 @@ namespace TransNeftTest.Services
 {
     public interface IWebService
     {
-        public Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetFreeElectricityMeters();
-        public Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetFreeCurrentTransformers();
-        public Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetFreeVoltageTransformers();
+        public Task<IEnumerable<ElectricityMeterDTO>> GetFreeElectricityMeters();
+        public Task<IEnumerable<CurrentTransformerDTO>> GetFreeCurrentTransformers();
+        public Task<IEnumerable<VoltageTransformerDTO>> GetFreeVoltageTransformers();
 
         public Task CreateMeterPoint(MeterPointDTO meterPointDto);
-        public Task<ActionResult<IEnumerable<CalcMeterViewModel>>> GetCalcMetersByYear(int year);
+        public Task<IEnumerable<CalcMeterDTO>> GetCalcMetersByYear(int year);
 
         public Task<bool> EObjectExists(int eObjectId);
-        public Task<ActionResult<IEnumerable<ElectricityMeterViewModel>>> GetEMExpiredByEObject(int eObjectId);
-        public Task<ActionResult<IEnumerable<CurrentTransformerViewModel>>> GetCTExpiredByEObject(int eObjectId);
-        public Task<ActionResult<IEnumerable<VoltageTransformerViewModel>>> GetVTExpiredByEObject(int eObjectId);
+        public Task<IEnumerable<ElectricityMeterDTO>> GetEMExpiredByEObject(int eObjectId);
+        public Task<IEnumerable<CurrentTransformerDTO>> GetCTExpiredByEObject(int eObjectId);
+        public Task<IEnumerable<VoltageTransformerDTO>> GetVTExpiredByEObject(int eObjectId);
     }
 }

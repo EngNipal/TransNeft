@@ -1,39 +1,43 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransNeftTest.DTOModels;
+using TransNeftTest.Exceptions;
 using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLMeterPointRepository : IRepository<MeterPoint>
+    public class SQLMeterPointRepository : IRepository<MeterPointDTO>
     {
-        private readonly TNEContext _db;
-        private readonly DbSet<MeterPoint> _dbSet;
+        private readonly TNEContext _dbContext;
+        private IMapper _mapper;
 
-        public SQLMeterPointRepository(TNEContext context)
+        public SQLMeterPointRepository(TNEContext context, IMapper mapper)
         {
-            _db = context;
-            _dbSet = _db.Set<MeterPoint>();
+            _dbContext = context;
+            _mapper = mapper;
         }
 
-        public async Task AddAsync(MeterPoint entity)
+        public async Task AddAsync(MeterPointDTO dto)
         {
-            await _db.MeterPoints.AddAsync(entity);
-            await _db.SaveChangesAsync();
+            var entity = _mapper.Map<MeterPointDTO, MeterPoint>(dto);
+
+            await _dbContext.MeterPoints.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(MeterPoint entity)
+        public async Task<MeterPointDTO> GetAsync(int id)
         {
-            _db.MeterPoints.Update(entity);
+            var entity = await _dbContext.MeterPoints
+                .Where(mp => mp.Id == id)
+                .FirstOrDefaultAsync();
 
-            await _db.SaveChangesAsync();
+            return entity == null
+                ? throw new EntityNotFoundException($"Точка измерения электроэнергии с Id = {id} не найдена.")
+                : _mapper.Map<MeterPoint, MeterPointDTO>(entity);
         }
-
-        public async Task<MeterPoint> GetAsync(int meterPointId) => await _db.MeterPoints
-            .FirstOrDefaultAsync(mp => mp.Id == meterPointId);
-
-        public IQueryable<MeterPoint> GetList() => _dbSet;
     }
 }
