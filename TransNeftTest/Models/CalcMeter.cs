@@ -5,6 +5,7 @@ namespace TransNeftTest.Models
     /// <summary> Расчётный прибор учёта. </summary>
     public class CalcMeter
     {
+        /// <summary> Идентификатор </summary>
         public int Id { get; set; }
         /// <summary> Номер </summary>
         public string Number {  get; set; }

@@ -2,6 +2,7 @@
 
 namespace TransNeftTest.Exceptions
 {
+    /// <summary> Ислкючение, возникающее при отсутствии запрошенной сущности в базе </summary>
     public class EntityNotFoundException : Exception
     {
         public EntityNotFoundException()

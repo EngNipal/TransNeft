@@ -17,38 +17,42 @@ namespace TransNeftTest.Repositories
 
         public async Task AddAsync(CurrentTransformer entity)
         {
-            // TODO: Write code to add CT
-
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> Exist(int id) =>
+            await _dbContext.CurrentTransformers.AnyAsync(x => x.Id == id);
+
         public async Task<CurrentTransformer> GetAsync(int id)
         {
-            var entity = await _dbContext.CurrentTransformers.FirstOrDefaultAsync(em => em.Id == id);
+            var entity = await _dbContext.CurrentTransformers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(em => em.Id == id);
 
             return entity ?? throw new EntityNotFoundException($"Трансформатор тока с Id = {id} не найден.");
         }
 
         public async Task<IEnumerable<CurrentTransformerDto>> GetFreeAsync() =>
-            await _dbContext.CurrentTransformers.AsNoTracking()
+            await _dbContext.CurrentTransformers
+            .AsNoTracking()
             .Where(ct => ct.MeterPoint == null)
-            .Select(ct => new CurrentTransformerDto
+            .Select(ct => new CurrentTransformerDto()
             {
                 Id = ct.Id,
                 Number = ct.Number
             })
             .ToListAsync();
 
-        public async Task<IEnumerable<CurrentTransformerDto>> GetExpiredByEObjectIdAsync(int eObjectDtoId) =>
-            await _dbContext.CurrentTransformers.AsNoTracking()
-                .Where(ct => ct.MeterPoint.EObjectId == eObjectDtoId &&
-                        ct.CheckDate < DateTime.Now)
-                .Select(ct => new CurrentTransformerDto
-                {
-                    Id = ct.Id,
-                    Number = ct.Number
-                })
-                .ToListAsync();
+        public async Task<IEnumerable<CurrentTransformerDto>> GetExpiredByEObjectIdAsync(int eObjectId) =>
+            await _dbContext.CurrentTransformers
+            .AsNoTracking()
+            .Where(ct => ct.MeterPoint.EObjectId == eObjectId)
+            .Where(ct => ct.CheckDate < DateTime.Now)
+            .Select(ct => new CurrentTransformerDto(
+                ct.Id,
+                ct.Number,
+                ct.CheckDate))
+            .ToListAsync();
     }
 }

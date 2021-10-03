@@ -19,20 +19,23 @@ namespace TransNeftTest.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> Exist(int id) =>
+            await _dbContext.CalcMeters.AnyAsync(x => x.Id == id);
+
         public async Task<CalcMeter> GetAsync(int id) =>
             await _dbContext.CalcMeters
+            .AsNoTracking()
             .FirstOrDefaultAsync(cm => cm.Id == id);
 
-        public async Task<IEnumerable<CalcMeterDto>> GetAllByYearAsync(int year)
-        {
-            return await _dbContext.CalcMeters
-                .Where(cm => cm.StartDate.Year == year)
-                .Select(cm => new CalcMeterDto
-                (
-                    cm.Id,
-                    cm.Number
-                ))
-                .ToListAsync();
-        }
+        public async Task<IEnumerable<CalcMeterDto>> GetAllByYearAsync(int year) => 
+            await _dbContext.CalcMeters
+            .AsNoTracking()
+            .Where(cm => cm.StartDate.Year == year)
+            .Select(cm => new CalcMeterDto(
+                cm.Id,
+                cm.Number,
+                cm.StartDate,
+                cm.EndDate))
+            .ToListAsync();
     }
 }

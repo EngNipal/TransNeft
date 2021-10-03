@@ -43,14 +43,13 @@ namespace TransNeftTest.Services
         public async Task<IEnumerable<VoltageTransformerDto>> GetFreeVoltageTransformers() =>
             await _voltageTransformerRepo.GetFreeAsync();
 
-        // Создание новой точки измерения.
         public async Task CreateMeterPoint(MeterPointDto meterPointDto)
         {
             var meterPointEntity = new MeterPoint
             {
                 Id = meterPointDto.Id,
                 Name = meterPointDto.Name,
-                ElectricityMeterId = meterPointDto.ElictricityMeterId,
+                ElectricityMeterId = meterPointDto.ElectricityMeterId,
                 CurrentTransformerId = meterPointDto.CurrentTransformerId,
                 VoltageTransformerId = meterPointDto.VoltageTransformerId,
                 EObjectId = meterPointDto.EObjectId,
@@ -60,22 +59,17 @@ namespace TransNeftTest.Services
             await _meterPointRepo.AddAsync(meterPointEntity);
         }
 
-        // Получение расчётных приборов учёта по году.
         public async Task<IEnumerable<CalcMeterDto>> GetCalcMetersByYear(int year) =>
             await _calcMeterRepo.GetAllByYearAsync(year);
 
-        // Проверка существования EObject с указанным Id.
-        public async Task<bool> EObjectExists(int eObjectId) => await _eObjectRepo.GetAsync(eObjectId) != null;
+        public async Task<bool> EObjectExists(int eObjectId) => await _eObjectRepo.Exist(eObjectId);
 
-        // Выбор счётчиков с истёкшим сроком поверки по указанному объекту потребления.
         public async Task<IEnumerable<ElectricityMeterDto>> GetElectricityMeterExpiredByEObject(int eObjectId) =>
             await _electricityMeterRepo.GetExpiredByEObjectIdAsync(eObjectId);
 
-        // Выбор трансформаторов тока с истёкшим сроком поверки по указанному объекту потребления.
         public async Task<IEnumerable<CurrentTransformerDto>> GetCurrentTransformerExpiredByEObject(int eObjectId) => 
             await _currentTransformerRepo.GetExpiredByEObjectIdAsync(eObjectId);
 
-        // Выбор трансформаторов напряжения с истёкшим сроком поверки по указанному объекту потребления.
         public async Task<IEnumerable<VoltageTransformerDto>> GetVoltageTransformerExpiredByEObject(int eObjectId) =>
             await _voltageTransformerRepo.GetExpiredByEObjectIdAsync(eObjectId);
     }

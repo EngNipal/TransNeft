@@ -36,14 +36,14 @@ namespace TransNeftTest
             {
                 Name = "Потребитель-1",
                 Address = "Адрес потребителя-1",
-                ParentOrganizationId = organization2.Id
+                ParentOrganizationId = organization2.Id,
             };
 
             var eObject2 = new EObject()
             {
                 Name = "Потребитель-2",
                 Address = "Адрес потребителя-2",
-                ParentOrganizationId = organization2.Id
+                ParentOrganizationId = organization2.Id,
             };
 
             if (!context.EObjects.Any())
@@ -103,11 +103,20 @@ namespace TransNeftTest
                 DeliveryPointId = deliveryPoint3.Id
             };
 
+            var calcMeter4 = new CalcMeter()
+            {
+                Number = "4-2021",
+                StartDate = new DateTime(2021, 10, 01),
+                EndDate = new DateTime(2021, 12, 31),
+                DeliveryPointId = deliveryPoint3.Id
+            };
+
             if (!context.CalcMeters.Any())
             {
                 context.CalcMeters.Add(calcMeter1);
                 context.CalcMeters.Add(calcMeter2);
                 context.CalcMeters.Add(calcMeter3);
+                context.CalcMeters.Add(calcMeter4);
                 context.SaveChanges();
             }
 

@@ -1,17 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TransNeftTest.Models;
+﻿using TransNeftTest.Models;
 
 namespace TransNeftTest.DTOModels
 {
+    /// <summary> Dto-объект точки измерения электроэнергии. </summary>
     public class MeterPointDto
     {
         /// <summary> Идентификатор </summary>
-        [Required]
         public int Id { get; set; }
         /// <summary> Наименование </summary>
         public string Name { get; set; }
         /// <summary> Id счётчика электроэнергии. </summary>
-        public int ElictricityMeterId { get; set; }
+        public int ElectricityMeterId { get; set; }
         /// <summary> Id трансформатора тока. </summary>
         public int CurrentTransformerId { get; set; }
         /// <summary> Id трансформатора напряжения </summary>
@@ -21,11 +20,13 @@ namespace TransNeftTest.DTOModels
         /// <summary> Id расчётного прибора учёта. </summary>
         public int CalcMeterId { get; set; }
 
+        public MeterPointDto() { }
+
         public MeterPointDto(MeterPoint entity)
         {
             Id = entity.Id;
             Name = entity.Name;
-            ElictricityMeterId = entity.ElectricityMeterId;
+            ElectricityMeterId = entity.ElectricityMeterId;
             CurrentTransformerId = entity.CurrentTransformerId;
             VoltageTransformerId = entity.VoltageTransformerId;
             EObjectId = entity.EObjectId;

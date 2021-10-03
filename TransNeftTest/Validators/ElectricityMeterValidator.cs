@@ -4,6 +4,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
+    /// <summary> Валидатор счётчика электроэнергии. </summary>
     public class ElectricityMeterValidator : AbstractValidator<ElectricityMeterDto>
     {
         public ElectricityMeterValidator()

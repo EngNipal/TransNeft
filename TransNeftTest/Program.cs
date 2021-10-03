@@ -8,7 +8,6 @@ namespace TransNeftTest
 {
     public class Program
     {
-        // TODO: добавить комментарии.
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();

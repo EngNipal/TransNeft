@@ -17,40 +17,43 @@ namespace TransNeftTest.Repositories
 
         public async Task AddAsync(ElectricityMeter entity)
         {
-            // TODO: Write creation code.
-
             await _dbContext.ElectricityMeters.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> Exist(int id) =>
+            await _dbContext.ElectricityMeters.AnyAsync(x => x.Id == id);
+
         public async Task<ElectricityMeter> GetAsync(int id)
         {
             var entity = await _dbContext.ElectricityMeters
-            .Where(em => em.Id == id)
-            .FirstOrDefaultAsync();
+                .AsNoTracking()
+                .Where(em => em.Id == id)
+                .FirstOrDefaultAsync();
 
             return entity ?? throw new EntityNotFoundException($"Счётчик электроэнергии с Id = {id} не найден.");
         }
 
         public async Task<IEnumerable<ElectricityMeterDto>> GetFreeAsync() =>
-            await _dbContext.ElectricityMeters.AsNoTracking()
+            await _dbContext.ElectricityMeters
+            .AsNoTracking()
             .Where(em => em.MeterPoint == null)
-            .Select(em => new ElectricityMeterDto
+            .Select(em => new ElectricityMeterDto()
             {
                 Id = em.Id,
                 Number = em.Number
             })
             .ToListAsync();
 
-        public async Task<IEnumerable<ElectricityMeterDto>> GetExpiredByEObjectIdAsync(int eObjectDtoId) =>
-            await _dbContext.ElectricityMeters.AsNoTracking()
-            .Where(em => em.MeterPoint.EObjectId == eObjectDtoId &&
-                        em.CheckDate < DateTime.Now)
-            .Select(em => new ElectricityMeterDto
-            {
-                Id = em.Id,
-                Number = em.Number
-            })
+        public async Task<IEnumerable<ElectricityMeterDto>> GetExpiredByEObjectIdAsync(int eObjectId) =>
+            await _dbContext.ElectricityMeters
+            .AsNoTracking()
+            .Where(em => em.MeterPoint.EObjectId == eObjectId)
+            .Where(em => em.CheckDate < DateTime.Now)
+            .Select(em => new ElectricityMeterDto(
+                em.Id,
+                em.Number,
+                em.CheckDate))
             .ToListAsync();
     }
 }

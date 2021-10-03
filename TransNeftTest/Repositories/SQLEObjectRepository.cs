@@ -19,8 +19,12 @@ namespace TransNeftTest.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> Exist(int id) =>
+            await _dbContext.EObjects.AnyAsync(x => x.Id == id);
+
         public async Task<EObject> GetAsync(int id) =>
             await _dbContext.EObjects
+            .AsNoTracking()
             .FirstOrDefaultAsync(eo => eo.Id == id);
     }
 }

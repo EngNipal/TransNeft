@@ -1,11 +1,14 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System.Diagnostics;
 using TransNeftTest.Validators;
 
 namespace TransNeftTest
@@ -23,7 +26,11 @@ namespace TransNeftTest
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<TNEContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<TNEContext>(options =>
+            {
+                options.UseSqlServer(connection);
+                options.LogTo(message => Debug.WriteLine(message), LogLevel.Information);
+            });
 
             services.AddServiceProfile();
             services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<OrganizationValidator>());

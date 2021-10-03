@@ -3,6 +3,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
+    /// <summary> Валидатор конкретизированного объекта. </summary>
     public class IdentifiedObjectValidator : AbstractValidator<IdentifiedObjectDto>
     {
         public IdentifiedObjectValidator()

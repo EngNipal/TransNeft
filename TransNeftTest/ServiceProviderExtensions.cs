@@ -12,11 +12,11 @@ namespace TransNeftTest
             services.AddScoped<IWebService, WebService>();
 
             services.AddTransient<IRepository<EObject>, SQLEObjectRepository>();
-            services.AddTransient<IRepository<CalcMeter>, SQLCalcMeterRepository>();
+            services.AddTransient<IRepository<MeterPoint>, SQLMeterPointRepository>();
             services.AddTransient<ICurrentTransformerRepository, SQLCurrentTransformerRepository>();
             services.AddTransient<IElectricityMeterRepository, SQLElectricityMeterRepository>();
-            services.AddTransient<IRepository<MeterPoint>, SQLMeterPointRepository>();
             services.AddTransient<IVoltageTransformerRepository, SQLVoltageTransformerRepository>();
+            services.AddTransient<ICalcMeterRepository, SQLCalcMeterRepository>();
         }
     }
 }

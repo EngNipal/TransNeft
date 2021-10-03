@@ -3,6 +3,7 @@
     /// <summary> Точка измерения электроэнергии. </summary>
     public class MeterPoint
     {
+        /// <summary> Идентификатор </summary>
         public int Id { get; set; }
         /// <summary> Наименование </summary>
         public string Name { get; set; }
@@ -26,5 +27,7 @@
         public int CalcMeterId { get; set; }
         /// <summary> Расчётный прибор учёта. </summary>
         public CalcMeter CalcMeter { get; set; }
+
+        public MeterPoint() { }
     }
 }

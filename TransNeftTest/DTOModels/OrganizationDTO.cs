@@ -1,10 +1,16 @@
-﻿namespace TransNeftTest.DTOModels
+﻿using TransNeftTest.Models;
+
+namespace TransNeftTest.DTOModels
 {
     public class OrganizationDto : IdentifiedObjectDto
     {
         /// <summary> Id организации-владельца </summary>
-        public int? ParentOrganizationID { get; set; }
+        public int? ParentOrganizationId { get; set; }
 
-        // TODO: Возможно добавить конструктор проецирующий entity в Dto
+        public OrganizationDto() { }
+        public OrganizationDto(Organization entity) : base(entity)
+        {
+            ParentOrganizationId = entity.ParentOrganizationId;
+        }
     }
 }

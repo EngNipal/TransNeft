@@ -1,9 +1,12 @@
 ﻿using System;
+using TransNeftTest.Models;
 
 namespace TransNeftTest.DTOModels
 {
+    /// <summary> Dto-объект расчётного прибора учёта.</summary>
     public class CalcMeterDto
     {
+        /// <summary> Идентификатор </summary>
         public int Id { get; set; }
         /// <summary> Номер. </summary>
         public string Number { get; set; }
@@ -18,12 +21,22 @@ namespace TransNeftTest.DTOModels
 
         public CalcMeterDto() { }
 
-        public CalcMeterDto(int id, string number)
+        public CalcMeterDto(int id, string number, DateTime startDate, DateTime endDate)
         {
             Id = id;
             Number = number;
+            StartDate = startDate;
+            EndDate = endDate;
         }
 
-        // TODO: Возможно добавить конструктор проецирующий entity в Dto
+        public CalcMeterDto(CalcMeter entity)
+        {
+            Id = entity.Id;
+            Number = entity.Number;
+            StartDate = entity.StartDate;
+            EndDate = entity.EndDate;
+            DeliveryPointId = entity.DeliveryPointId;
+            MeterPointId = entity.MeterPointId;
+        }
     }
 }

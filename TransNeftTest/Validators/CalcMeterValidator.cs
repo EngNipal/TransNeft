@@ -4,6 +4,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
+    /// <summary> Валидатор расчётного прибора учёта. </summary>
     public class CalcMeterValidator : AbstractValidator<CalcMeterDto>
     {
         public CalcMeterValidator()
