@@ -3,7 +3,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class MeterPointValidator : AbstractValidator<MeterPointDTO>
+    public class MeterPointValidator : AbstractValidator<MeterPointDto>
     {
         //private const string _emptyNameMessage = "Имя не может быть пустым.";
 

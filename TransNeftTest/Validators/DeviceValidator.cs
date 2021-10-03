@@ -4,7 +4,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class DeviceValidator : AbstractValidator<DeviceDTO>
+    public class DeviceValidator : AbstractValidator<DeviceDto>
     {
         public DeviceValidator()
         {

@@ -4,7 +4,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class VoltageTransformerValidator : AbstractValidator<VoltageTransformerDTO>
+    public class VoltageTransformerValidator : AbstractValidator<VoltageTransformerDto>
     {
         public VoltageTransformerValidator()
         {

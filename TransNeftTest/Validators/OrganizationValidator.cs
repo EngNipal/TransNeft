@@ -3,7 +3,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class OrganizationValidator : AbstractValidator<OrganizationDTO>
+    public class OrganizationValidator : AbstractValidator<OrganizationDto>
     {
         //private const string _emptyAddressMessage = "Адрес не может быть пустым!";
         //private const string _emptyNameMessage = "Имя не может быть пустым!";

@@ -3,7 +3,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class DeliveryPointValidator : AbstractValidator<DeliveryPointDTO>
+    public class DeliveryPointValidator : AbstractValidator<DeliveryPointDto>
     {
         public DeliveryPointValidator()
         {

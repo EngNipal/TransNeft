@@ -4,7 +4,7 @@ using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Validators
 {
-    public class CurrentTransformerValidator : AbstractValidator<CurrentTransformerDTO>
+    public class CurrentTransformerValidator : AbstractValidator<CurrentTransformerDto>
     {
         public CurrentTransformerValidator()
         {

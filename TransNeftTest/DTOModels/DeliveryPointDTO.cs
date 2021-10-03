@@ -1,6 +1,6 @@
 ﻿namespace TransNeftTest.DTOModels
 {
-    public class DeliveryPointDTO
+    public class DeliveryPointDto
     {
         public int Id { get; set; }
         /// <summary> Наименование точки поставки </summary>
@@ -11,5 +11,7 @@
         public int CalcMeterId { get; set; }
         /// <summary> Id организации-владельца </summary>
         public int EObjectId { get; set; }
+
+        // TODO: Возможно добавить конструктор проецирующий entity в Dto
     }
 }

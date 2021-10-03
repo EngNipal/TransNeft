@@ -3,40 +3,52 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransNeftTest.DTOModels;
+using TransNeftTest.Exceptions;
 using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLVoltageTransformerRepository : IRepository<VoltageTransformer>
+    public class SQLVoltageTransformerRepository : IVoltageTransformerRepository
     {
-        private readonly TNEContext _db;
-        private readonly DbSet<VoltageTransformer> _dbSet;
+        private readonly TNEContext _dbContext;
 
-        public SQLVoltageTransformerRepository(TNEContext context)
-        {
-            _db = context;
-            _dbSet = _db.Set<VoltageTransformer>();
-        }
+        public SQLVoltageTransformerRepository(TNEContext context) => _dbContext = context;
 
         public async Task AddAsync(VoltageTransformer entity)
         {
-            await _db.AddAsync(entity);
-            await _db.SaveChangesAsync();
+            // TODO: Write creation code.
+
+            await _dbContext.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(VoltageTransformer entity)
+        public async Task<VoltageTransformer> GetAsync(int id)
         {
-            _db.VoltageTransformers.Update(entity);
+            var entity = await _dbContext.VoltageTransformers.FirstOrDefaultAsync(vt => vt.Id == id);
 
-            await _db.SaveChangesAsync();
+            return entity ?? throw new EntityNotFoundException($"Трансформатор напряжения с Id = {id} не найден");
         }
 
-        public async Task<VoltageTransformer> GetAsync(int id) => await _db.VoltageTransformers
-            .Include(vt => vt.MeterPoint)
-            .FirstOrDefaultAsync(vt => vt.Id == id);
+        public async Task<IEnumerable<VoltageTransformerDto>> GetFreeAsync() =>
+            await _dbContext.VoltageTransformers.AsNoTracking()
+            .Where(vt => vt.MeterPoint == null)
+            .Select(vt => new VoltageTransformerDto
+            {
+                Id = vt.Id,
+                Number = vt.Number
+            })
+            .ToListAsync();
 
-        public IQueryable<VoltageTransformer> GetList() => 
-            _dbSet
-            .Include(vt => vt.MeterPoint);
+        public async Task<IEnumerable<VoltageTransformerDto>> GetExpiredByEObjectIdAsync(int eObjectId) =>
+            await _dbContext.VoltageTransformers.AsNoTracking()
+            .Where(vt => vt.MeterPoint.EObjectId == eObjectId &&
+                    vt.CheckDate < DateTime.Now)
+            .Select(vt => new VoltageTransformerDto
+            {
+                Id = vt.Id,
+                Number = vt.Number
+            })
+            .ToListAsync();
     }
 }

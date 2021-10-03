@@ -1,41 +1,38 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using TransNeftTest.Models;
 using System.Linq;
+using TransNeftTest.DTOModels;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLCalcMeterRepository : IRepository<CalcMeter>
+    public class SQLCalcMeterRepository : ICalcMeterRepository
     {
-        private readonly TNEContext _db;
-        private readonly DbSet<CalcMeter> _dbSet;
+        private readonly TNEContext _dbContext;
 
-        public SQLCalcMeterRepository(TNEContext context)
-        {
-            _db = context;
-            _dbSet = _db.Set<CalcMeter>();
-        }
+        public SQLCalcMeterRepository(TNEContext context) => _dbContext = context;
 
         public async Task AddAsync(CalcMeter entity)
         {
-            await _db.CalcMeters.AddAsync(entity);
-            await _db.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(CalcMeter entity)
-        {
-            _db.CalcMeters.Update(entity);
-
-            await _db.SaveChangesAsync();
+            await _dbContext.CalcMeters.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<CalcMeter> GetAsync(int id) =>
-            await _db.CalcMeters
+            await _dbContext.CalcMeters
             .FirstOrDefaultAsync(cm => cm.Id == id);
 
-        public IQueryable<CalcMeter> GetList() => _dbSet;
+        public async Task<IEnumerable<CalcMeterDto>> GetAllByYearAsync(int year)
+        {
+            return await _dbContext.CalcMeters
+                .Where(cm => cm.StartDate.Year == year)
+                .Select(cm => new CalcMeterDto
+                (
+                    cm.Id,
+                    cm.Number
+                ))
+                .ToListAsync();
+        }
     }
 }

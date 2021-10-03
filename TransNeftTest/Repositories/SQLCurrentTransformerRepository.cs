@@ -3,41 +3,52 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransNeftTest.DTOModels;
+using TransNeftTest.Exceptions;
 using TransNeftTest.Models;
 
 namespace TransNeftTest.Repositories
 {
-    public class SQLCurrentTransformerRepository : IRepository<CurrentTransformer>
+    public class SQLCurrentTransformerRepository : ICurrentTransformerRepository
     {
-        private readonly TNEContext _db;
-        private readonly DbSet<CurrentTransformer> _dbSet;
+        private readonly TNEContext _dbContext;
 
-        public SQLCurrentTransformerRepository(TNEContext context)
-        {
-            _db = context;
-            _dbSet = _db.Set<CurrentTransformer>();
-        }
+        public SQLCurrentTransformerRepository(TNEContext context) => _dbContext = context;
 
         public async Task AddAsync(CurrentTransformer entity)
         {
-            await _db.AddAsync(entity);
-            await _db.SaveChangesAsync();
+            // TODO: Write code to add CT
+
+            await _dbContext.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<CurrentTransformer> GetAsync(int id) =>
-            await _db.CurrentTransformers
-            .Include(ct => ct.MeterPoint)
-            .FirstOrDefaultAsync(ct => ct.Id == id);
-
-        public IQueryable<CurrentTransformer> GetList() =>
-            _dbSet
-            .Include(ct => ct.MeterPoint);
-
-        public async Task UpdateAsync(CurrentTransformer entity)
+        public async Task<CurrentTransformer> GetAsync(int id)
         {
-            _db.Update(entity);
+            var entity = await _dbContext.CurrentTransformers.FirstOrDefaultAsync(em => em.Id == id);
 
-            await _db.SaveChangesAsync();
+            return entity ?? throw new EntityNotFoundException($"Трансформатор тока с Id = {id} не найден.");
         }
+
+        public async Task<IEnumerable<CurrentTransformerDto>> GetFreeAsync() =>
+            await _dbContext.CurrentTransformers.AsNoTracking()
+            .Where(ct => ct.MeterPoint == null)
+            .Select(ct => new CurrentTransformerDto
+            {
+                Id = ct.Id,
+                Number = ct.Number
+            })
+            .ToListAsync();
+
+        public async Task<IEnumerable<CurrentTransformerDto>> GetExpiredByEObjectIdAsync(int eObjectDtoId) =>
+            await _dbContext.CurrentTransformers.AsNoTracking()
+                .Where(ct => ct.MeterPoint.EObjectId == eObjectDtoId &&
+                        ct.CheckDate < DateTime.Now)
+                .Select(ct => new CurrentTransformerDto
+                {
+                    Id = ct.Id,
+                    Number = ct.Number
+                })
+                .ToListAsync();
     }
 }

@@ -1,23 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TransNeftTest.DTOModels;
-using TransNeftTest.ViewModels;
 
 namespace TransNeftTest.Services
 {
     public interface IWebService
     {
-        public Task<IEnumerable<ElectricityMeterDTO>> GetFreeElectricityMeters();
-        public Task<IEnumerable<CurrentTransformerDTO>> GetFreeCurrentTransformers();
-        public Task<IEnumerable<VoltageTransformerDTO>> GetFreeVoltageTransformers();
+        public Task<IEnumerable<ElectricityMeterDto>> GetFreeElectricityMeters();
+        public Task<IEnumerable<CurrentTransformerDto>> GetFreeCurrentTransformers();
+        public Task<IEnumerable<VoltageTransformerDto>> GetFreeVoltageTransformers();
 
-        public Task CreateMeterPoint(MeterPointDTO meterPointDto);
-        public Task<IEnumerable<CalcMeterDTO>> GetCalcMetersByYear(int year);
+        public Task CreateMeterPoint(MeterPointDto meterPointDto);
+        public Task<IEnumerable<CalcMeterDto>> GetCalcMetersByYear(int year);
 
         public Task<bool> EObjectExists(int eObjectId);
-        public Task<IEnumerable<ElectricityMeterDTO>> GetEMExpiredByEObject(int eObjectId);
-        public Task<IEnumerable<CurrentTransformerDTO>> GetCTExpiredByEObject(int eObjectId);
-        public Task<IEnumerable<VoltageTransformerDTO>> GetVTExpiredByEObject(int eObjectId);
+        public Task<IEnumerable<ElectricityMeterDto>> GetElectricityMeterExpiredByEObject(int eObjectId);
+        public Task<IEnumerable<CurrentTransformerDto>> GetCurrentTransformerExpiredByEObject(int eObjectId);
+        public Task<IEnumerable<VoltageTransformerDto>> GetVoltageTransformerExpiredByEObject(int eObjectId);
     }
 }
